@@ -10,6 +10,7 @@
 		D1A2DB361BB419C80051D6A5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1A2DB351BB419C80051D6A5 /* main.cpp */; };
 		D1A2DB3D1BB41CEE0051D6A5 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1A2DB3C1BB41CEE0051D6A5 /* OpenGL.framework */; };
 		D1A2DB3F1BB41D160051D6A5 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1A2DB3E1BB41D160051D6A5 /* GLUT.framework */; };
+		D1E135C81BB5397E00062547 /* theRoom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1E135C61BB5397E00062547 /* theRoom.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +30,8 @@
 		D1A2DB351BB419C80051D6A5 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D1A2DB3C1BB41CEE0051D6A5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		D1A2DB3E1BB41D160051D6A5 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		D1E135C61BB5397E00062547 /* theRoom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = theRoom.cpp; sourceTree = "<group>"; };
+		D1E135C71BB5397E00062547 /* theRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = theRoom.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +69,8 @@
 			isa = PBXGroup;
 			children = (
 				D1A2DB351BB419C80051D6A5 /* main.cpp */,
+				D1E135C61BB5397E00062547 /* theRoom.cpp */,
+				D1E135C71BB5397E00062547 /* theRoom.h */,
 			);
 			path = monteCarlo;
 			sourceTree = "<group>";
@@ -126,6 +131,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1E135C81BB5397E00062547 /* theRoom.cpp in Sources */,
 				D1A2DB361BB419C80051D6A5 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,6 +223,22 @@
 		D1A2DB3B1BB419C80051D6A5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					Macintosh,
+					HD,
+					"▸",
+					"Användare",
+					"▸",
+					danielholst,
+					"▸",
+					Documents,
+					"▸",
+					TNCG15,
+					"▸",
+					monteCarlo,
+					"▸",
+					monteCarlo,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -240,6 +262,7 @@
 				D1A2DB3B1BB419C80051D6A5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

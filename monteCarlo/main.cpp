@@ -11,107 +11,12 @@
 #include <math.h>
 #include <GLUT/glut.h>
 
+#include "theRoom.h"
+#include "glm/glm/glm.hpp"
+
 const GLfloat EDGE = 50.0;
 const GLfloat SQR3 = sqrt(3);
 const GLfloat SQR6 = sqrt(6);
-
-bool is_equal(GLfloat a[3], GLfloat b[3]) {
-    for (int i = 0; i < 3; ++i) {
-        if (abs(a[i] - b[i]) >= 5) {
-            return false;
-        }
-    }
-    return true;
-}
-
-bool is_equal(GLfloat vertices[4][3]) {
-    for (int i = 0; i < 4; ++i) {
-        for (int j = i + 1; j < 4; ++j) {
-            if (!is_equal(vertices[i], vertices[j])) {
-                return false;
-            }
-        }
-    }
-    return true;
-}
-
-void triangle(GLfloat vertices[3][3], GLfloat color[3]) {
-    glColor3fv(color);
-    for (int i = 0; i < 3; ++i) {
-        glVertex3fv(vertices[i]);
-    }
-}
-
-bool cmp(GLfloat v1[3], GLfloat v2[3]) {
-    for (int i = 2; i >= 0; --i) {
-        if (v1[i] != v2[i]) {
-            return v1[i] < v2[i];
-        }
-    }
-    return false;
-}
-
-void swap(GLfloat v1[3], GLfloat v2[3]) {
-    for (int i = 0; i < 3; ++i) {
-        GLfloat tmp = v1[i];
-        v1[i] = v2[i];
-        v2[i] = tmp;
-    }
-}
-
-void sort(GLfloat vertices[4][3]) {
-    for (int i = 0; i < 4; ++i) {
-        for (int j = i + 1; j < 4; ++j) {
-            if (!cmp(vertices[i], vertices[j])) {
-                swap(vertices[i], vertices[j]);
-            }
-        }
-    }
-}
-
-void tetra(GLfloat vertices[4][3], GLfloat colors[4][3]) {
-    sort(vertices);
-    for (int i = 0; i < 4; ++i) {
-        GLfloat tri[3][3];
-        for (int j = 0; j < 3; ++j) {
-            for (int k = 0; k < 3; ++k) {
-                tri[j][k] = vertices[(i+j)%4][k];
-            }
-        }
-        triangle(tri, colors[i]);
-    }
-}
-
-void divide_triangle(GLfloat vertices[4][3], GLfloat colors[4][3]) {
-    if (is_equal(vertices)) {
-        tetra(vertices, colors);
-    }
-    else {
-        for (int i = 0; i < 4; ++i) {
-            GLfloat child[4][3];
-            for (int j = 0; j < 4; ++j) {
-                for (int k = 0; k < 3; ++k) {
-                    child[j][k] = (vertices[i][k] + vertices[(i+j)%4][k]) / 2;
-                }
-            }
-            divide_triangle(child, colors);
-        }
-    }
-}
-
-void display()
-{
-    GLfloat vertices[4][3] = { {0.0, 0.0, 0.0}, {EDGE, 0.0, 0.0}, {EDGE/2, EDGE*SQR3/2, 0.0}, {EDGE/2, EDGE*SQR3/6, EDGE*SQR6/3} };
-    GLfloat colors[4][3] = { {1.0, 1.0, 0.5}, {0.5, 1.0, 0.5}, {0.5, 0.8, 0.5}, {0.5, 0.5, 1.0} };
-    
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
-    glBegin(GL_TRIANGLES);
-    divide_triangle(vertices, colors);
-    glEnd();
-    glFlush();
-    
-}
 
 void drawWall()
 {
@@ -133,18 +38,104 @@ void drawCube()
     glutSolidCube(1.0);
     glFlush();
     
+    
+    
 }
 
 void drawSphere()
 {
     glColor3f(1.0,0.0,0.0);
     glLoadIdentity();
-    glTranslatef(-2,0,0);
+    glTranslatef(0,0,0);
     glutSolidSphere(1.0, 40, 40);
     glFlush();
 }
 
-void display2()
+void draw()
+{
+    
+    //Clear screen
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glMatrixMode(GL_MODELVIEW); //Switch to the drawing perspective
+    glLoadIdentity(); //Reset the drawing perspective
+    
+//    glBegin(GL_TRIANGLES);
+// 
+//    glColor3f(1, 0, 0);
+//    glVertex3f(-0.5f, 0.0f, -4.0f);
+//   
+//    glColor3f(0,1,0);
+//    glVertex3f(0.5f, 0.0f, -4.0f);
+//   
+//    glColor3f(0,0,1);
+//    glVertex3f(0.0f, 1.0f, -4.0f);
+//    
+//    
+//    glEnd();
+
+    glBegin(GL_QUADS); //Begin drawing quadrilaterals
+    glColor3f(0.0, 0.3, 0.4);
+    
+    // 4 corner points on square
+    glVertex3f(2.0f, 1.0f, -5.0f);
+    glVertex3f(2.0f, 1.0f, -7.0f);
+    glVertex3f(-2.0f, 1.0f, -7.0f);
+    glVertex3f(-2.0f, 1.0f, -5.0f);
+    
+    glEnd();
+
+
+    glBegin(GL_QUADS); //Begin drawing quadrilaterals
+    glColor3f(0,0.2,0.7);
+    
+    // 4 corner points on square
+    glVertex3f(2.0f, -1.0f, -5.0f);
+    glVertex3f(2.0f, -1.0f, -7.0f);
+    glVertex3f(-2.0f, -1.0f, -7.0f);
+    glVertex3f(-2.0f, -1.0f, -5.0f);
+    
+    glEnd();
+    
+    glBegin(GL_QUADS); //Begin drawing quadrilaterals
+    glColor3f(0.5, 0.3, 0.1);
+    
+    // 4 corner points on square
+    glVertex3f(2.0f, -1.0f, -7.0f);
+    glVertex3f(2.0f, -1.0f, -5.0f);
+    glVertex3f(2.0f, 1.0f, -5.0f);
+    glVertex3f(2.0f, 1.0f, -7.0f);
+    
+    glEnd();
+    
+    glBegin(GL_QUADS); //Begin drawing quadrilaterals
+    glColor3f(0.5, 0.3, 0.1);
+    
+    // 4 corner points on square
+    glVertex3f(-2.0f, -1.0f, -7.0f);
+    glVertex3f(-2.0f, -1.0f, -5.0f);
+    glVertex3f(-2.0f, 1.0f, -5.0f);
+    glVertex3f(-2.0f, 1.0f, -7.0f);
+    
+    glEnd();
+    
+    glBegin(GL_QUADS); //Begin drawing quadrilaterals
+    glColor3f(0.4,0.2,.1);
+    
+    // 4 corner points on square
+    glVertex3f(-2.0f, -1.0f, -7.0f);
+    glVertex3f(2.0f, -1.0f, -7.0f);
+    glVertex3f(2.0f, 1.0f, -7.0f);
+    glVertex3f(-2.0f, 1.0f, -7.0f);
+    
+    
+    glEnd();
+    
+    drawSphere();
+    
+    glutSwapBuffers(); //Send scene to the screen to be shown
+}
+
+void display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
     drawSphere();
@@ -153,41 +144,47 @@ void display2()
     
 }
 
-void myInit2()
+//Called when the window is resized
+void handleResize(int w, int h)
 {
-    glClearColor(1.0,1.0,1.0,1.0);
-    glColor3f(1.0,0.0,0.0);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluOrtho2D(-5.0, 5.0, -5.0, 5.0);
-    glMatrixMode(GL_MODELVIEW);
+
+    //Tell OpenGL how to convert from coordinates to pixel values
+    glViewport(0, 0, w, h);
+    
+    glMatrixMode(GL_PROJECTION); //Switch to setting the camera perspective
+    
+    //Set the camera perspective
+    glLoadIdentity(); //Reset the camera
+    gluPerspective(45.0,                  //The camera angle
+                   (double)w / (double)h, //The width-to-height ratio
+                   1.0,                //The near z clipping coordinate
+                   200.0);              //The far z clipping coordinate
 }
 
-void myinit() {
-    glEnable(GL_DEPTH_TEST);
-    glClearColor(1.0, 1.0, 1.0, 1.0);
-    glColor3f(0.0, 1.0, 0.0);
+
+void myInit()
+{
+    //Initialize GLUT
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+    glutInitWindowSize(800, 800); //Window size
     
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glOrtho(0, EDGE, 0, EDGE*SQR3/2, -EDGE, 0);
-    
-    glMatrixMode(GL_MODELVIEW);
+    glutCreateWindow("Monte-Carlo ray tracing"); //Create a window
+    glEnable(GL_DEPTH_TEST); //Make sure 3D drawing works when one object is in front of another
+
 }
+
 
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
     
-    glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE | GLUT_DEPTH);
+    myInit();
     
-    glutInitWindowSize(600, 600*SQR3/2);
-    glutInitWindowPosition(0, 0);
-    glutCreateWindow("monteCarlo");
+    //Set functions for glutMainLoop to call
+    glutDisplayFunc(draw);
+    glutReshapeFunc(handleResize);
     
-    glutDisplayFunc(display2);
-    
-    myInit2();
     glutMainLoop();
+    
     return 0;
 }
