@@ -12,11 +12,11 @@
 #include <GLUT/glut.h>
 
 #include "theRoom.h"
-#include "glm/glm/glm.hpp"
+#include "ray.h"
 
-const GLfloat EDGE = 50.0;
-const GLfloat SQR3 = sqrt(3);
-const GLfloat SQR6 = sqrt(6);
+
+const GLint screenWidth = 800;
+const GLint screenHeight = 600;
 
 void drawWall()
 {
@@ -162,27 +162,34 @@ void handleResize(int w, int h)
 }
 
 
-void myInit()
+void myInit(int &argc, char** argv)
 {
     //Initialize GLUT
+    glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-    glutInitWindowSize(800, 800); //Window size
     
     glutCreateWindow("Monte-Carlo ray tracing"); //Create a window
     glEnable(GL_DEPTH_TEST); //Make sure 3D drawing works when one object is in front of another
-
 }
 
 
 int main(int argc, char** argv)
 {
-    glutInit(&argc, argv);
     
-    myInit();
+    glutInitWindowSize(screenWidth, screenHeight); //Window size
+    
+    myInit(argc, argv);
     
     //Set functions for glutMainLoop to call
     glutDisplayFunc(draw);
     glutReshapeFunc(handleResize);
+    
+    //loop through all pixels
+    for (int i = 0; i < screenWidth; i++)
+        for (int j = 0; j < screenHeight; j++)
+        {
+            
+        }
     
     glutMainLoop();
     

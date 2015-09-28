@@ -1,14 +1,17 @@
 //
-//  theRoom.cpp
+//  ray.cpp
 //  monteCarlo
 //
 //  Created by Daniel Holst on 2015-09-25.
 //  Copyright (c) 2015 Daniel Holst. All rights reserved.
 //
 
-#include "theRoom.h"
+#include "ray.h"
 
-TheRoom::TheRoom()
+Ray::Ray() {}
+
+Ray::Ray(glm::vec3 s, glm::vec3 dir)
 {
-//    sceneObjects = new std::vector<SceneObject*>();
-};
+    start = s;
+    direction = dir;
+}

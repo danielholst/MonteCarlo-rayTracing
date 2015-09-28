@@ -10,7 +10,10 @@
 		D1A2DB361BB419C80051D6A5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1A2DB351BB419C80051D6A5 /* main.cpp */; };
 		D1A2DB3D1BB41CEE0051D6A5 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1A2DB3C1BB41CEE0051D6A5 /* OpenGL.framework */; };
 		D1A2DB3F1BB41D160051D6A5 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1A2DB3E1BB41D160051D6A5 /* GLUT.framework */; };
+		D1CB528E1BB932F6005EAE34 /* sceneObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1CB528C1BB932F6005EAE34 /* sceneObject.cpp */; };
+		D1CB52911BB96883005EAE34 /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1CB528F1BB96883005EAE34 /* camera.cpp */; };
 		D1E135C81BB5397E00062547 /* theRoom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1E135C61BB5397E00062547 /* theRoom.cpp */; };
+		D1E135CD1BB5B53100062547 /* ray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1E135CB1BB5B53100062547 /* ray.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,8 +33,14 @@
 		D1A2DB351BB419C80051D6A5 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D1A2DB3C1BB41CEE0051D6A5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		D1A2DB3E1BB41D160051D6A5 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		D1CB528C1BB932F6005EAE34 /* sceneObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sceneObject.cpp; sourceTree = "<group>"; };
+		D1CB528D1BB932F6005EAE34 /* sceneObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sceneObject.h; sourceTree = "<group>"; };
+		D1CB528F1BB96883005EAE34 /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
+		D1CB52901BB96883005EAE34 /* camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
 		D1E135C61BB5397E00062547 /* theRoom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = theRoom.cpp; sourceTree = "<group>"; };
 		D1E135C71BB5397E00062547 /* theRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = theRoom.h; sourceTree = "<group>"; };
+		D1E135CB1BB5B53100062547 /* ray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ray.cpp; sourceTree = "<group>"; };
+		D1E135CC1BB5B53100062547 /* ray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ray.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +80,12 @@
 				D1A2DB351BB419C80051D6A5 /* main.cpp */,
 				D1E135C61BB5397E00062547 /* theRoom.cpp */,
 				D1E135C71BB5397E00062547 /* theRoom.h */,
+				D1E135CB1BB5B53100062547 /* ray.cpp */,
+				D1E135CC1BB5B53100062547 /* ray.h */,
+				D1CB528C1BB932F6005EAE34 /* sceneObject.cpp */,
+				D1CB528D1BB932F6005EAE34 /* sceneObject.h */,
+				D1CB528F1BB96883005EAE34 /* camera.cpp */,
+				D1CB52901BB96883005EAE34 /* camera.h */,
 			);
 			path = monteCarlo;
 			sourceTree = "<group>";
@@ -131,8 +146,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1E135CD1BB5B53100062547 /* ray.cpp in Sources */,
+				D1CB528E1BB932F6005EAE34 /* sceneObject.cpp in Sources */,
 				D1E135C81BB5397E00062547 /* theRoom.cpp in Sources */,
 				D1A2DB361BB419C80051D6A5 /* main.cpp in Sources */,
+				D1CB52911BB96883005EAE34 /* camera.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,5 +10,15 @@
 #define __monteCarlo__theRoom__
 
 #include <stdio.h>
+#include <vector>
+#include "sceneObject.h"
 
+class TheRoom
+{
+public:
+    
+    TheRoom();
+    
+    std::vector<SceneObject*> *sceneObjects;
+};
 #endif /* defined(__monteCarlo__theRoom__) */
