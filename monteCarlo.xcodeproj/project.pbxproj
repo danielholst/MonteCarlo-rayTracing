@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D12C6FFA1BC27C0A0000D44D /* sceneImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D12C6FF81BC27C0A0000D44D /* sceneImage.cpp */; };
 		D1A2DB361BB419C80051D6A5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1A2DB351BB419C80051D6A5 /* main.cpp */; };
 		D1A2DB3D1BB41CEE0051D6A5 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1A2DB3C1BB41CEE0051D6A5 /* OpenGL.framework */; };
 		D1A2DB3F1BB41D160051D6A5 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1A2DB3E1BB41D160051D6A5 /* GLUT.framework */; };
@@ -29,6 +30,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D12C6FF81BC27C0A0000D44D /* sceneImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sceneImage.cpp; sourceTree = "<group>"; };
+		D12C6FF91BC27C0A0000D44D /* sceneImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sceneImage.h; sourceTree = "<group>"; };
 		D1A2DB321BB419C80051D6A5 /* monteCarlo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = monteCarlo; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1A2DB351BB419C80051D6A5 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D1A2DB3C1BB41CEE0051D6A5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -86,6 +89,8 @@
 				D1CB528D1BB932F6005EAE34 /* sceneObject.h */,
 				D1CB528F1BB96883005EAE34 /* camera.cpp */,
 				D1CB52901BB96883005EAE34 /* camera.h */,
+				D12C6FF81BC27C0A0000D44D /* sceneImage.cpp */,
+				D12C6FF91BC27C0A0000D44D /* sceneImage.h */,
 			);
 			path = monteCarlo;
 			sourceTree = "<group>";
@@ -146,6 +151,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D12C6FFA1BC27C0A0000D44D /* sceneImage.cpp in Sources */,
 				D1E135CD1BB5B53100062547 /* ray.cpp in Sources */,
 				D1CB528E1BB932F6005EAE34 /* sceneObject.cpp in Sources */,
 				D1E135C81BB5397E00062547 /* theRoom.cpp in Sources */,

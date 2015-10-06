@@ -11,14 +11,25 @@
 
 #include <stdio.h>
 #include "glm/glm/glm.hpp"
+#include "glm/glm/gtc/constants.hpp"
+#include "sceneImage.h"
+#include "ray.h"
 
 class Camera
 {
 public:
     Camera();
     
+    void sendRaysThroughScene();
+    
     glm::vec3 pos;
+    glm::vec3 upDir;
     glm::vec3 dir;
+    
+    float fovX;
+    float fovY;
+    
+    SceneImage *outputImage;
     
     
 };
