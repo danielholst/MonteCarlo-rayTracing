@@ -15,10 +15,6 @@
 #include "camera.h"
 #include "ray.h"
 
-
-const int screenWidth = 800;
-const int screenHeight = 600;
-
 int main(int argc, char** argv)
 {
     //init enviroment and camera

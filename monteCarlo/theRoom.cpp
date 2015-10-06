@@ -10,5 +10,5 @@
 
 TheRoom::TheRoom()
 {
-//    sceneObjects = new std::vector<SceneObject*>();
+    sceneObjects = new std::vector<SceneObject*>();
 };

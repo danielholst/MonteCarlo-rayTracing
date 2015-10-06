@@ -18,7 +18,7 @@ public:
     Ray();
     Ray(glm::vec3 s, glm::vec3 dir);
     
-private:
+
     glm::vec3 start;
     glm::vec3 direction;
 };
