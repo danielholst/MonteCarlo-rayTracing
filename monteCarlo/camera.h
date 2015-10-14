@@ -14,13 +14,14 @@
 #include "glm/glm/gtc/constants.hpp"
 #include "sceneImage.h"
 #include "ray.h"
+#include "theRoom.h"
 
 class Camera
 {
 public:
     Camera();
     
-    void sendRaysThroughScene();
+    void sendRaysThroughScene(TheRoom *room);
     
     glm::vec3 pos;
     glm::vec3 upDir;

@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		D12C6FFA1BC27C0A0000D44D /* sceneImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D12C6FF81BC27C0A0000D44D /* sceneImage.cpp */; };
+		D14F5D671BC544690054207D /* cubeObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D14F5D651BC544690054207D /* cubeObject.cpp */; };
+		D154312C1BCD86ED004114EF /* planeObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D154312A1BCD86ED004114EF /* planeObject.cpp */; };
+		D15A3D8C1BCD23A600498F68 /* intersectionPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D15A3D8A1BCD23A600498F68 /* intersectionPoint.cpp */; };
+		D15A3D8F1BCD474300498F68 /* lightsource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D15A3D8D1BCD474300498F68 /* lightsource.cpp */; };
+		D16486A01BC6B45200626EF9 /* sphereObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D164869E1BC6B45200626EF9 /* sphereObject.cpp */; };
+		D182D9951BCE850700666FB5 /* objectMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D182D9931BCE850700666FB5 /* objectMaterial.cpp */; };
+		D182D9981BCE859300666FB5 /* color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D182D9961BCE859300666FB5 /* color.cpp */; };
 		D1A2DB361BB419C80051D6A5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1A2DB351BB419C80051D6A5 /* main.cpp */; };
 		D1A2DB3D1BB41CEE0051D6A5 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1A2DB3C1BB41CEE0051D6A5 /* OpenGL.framework */; };
 		D1A2DB3F1BB41D160051D6A5 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1A2DB3E1BB41D160051D6A5 /* GLUT.framework */; };
@@ -32,6 +39,20 @@
 /* Begin PBXFileReference section */
 		D12C6FF81BC27C0A0000D44D /* sceneImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sceneImage.cpp; sourceTree = "<group>"; };
 		D12C6FF91BC27C0A0000D44D /* sceneImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sceneImage.h; sourceTree = "<group>"; };
+		D14F5D651BC544690054207D /* cubeObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cubeObject.cpp; sourceTree = "<group>"; };
+		D14F5D661BC544690054207D /* cubeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cubeObject.h; sourceTree = "<group>"; };
+		D154312A1BCD86ED004114EF /* planeObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = planeObject.cpp; sourceTree = "<group>"; };
+		D154312B1BCD86ED004114EF /* planeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = planeObject.h; sourceTree = "<group>"; };
+		D15A3D8A1BCD23A600498F68 /* intersectionPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = intersectionPoint.cpp; sourceTree = "<group>"; };
+		D15A3D8B1BCD23A600498F68 /* intersectionPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = intersectionPoint.h; sourceTree = "<group>"; };
+		D15A3D8D1BCD474300498F68 /* lightsource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lightsource.cpp; sourceTree = "<group>"; };
+		D15A3D8E1BCD474300498F68 /* lightsource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lightsource.h; sourceTree = "<group>"; };
+		D164869E1BC6B45200626EF9 /* sphereObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sphereObject.cpp; sourceTree = "<group>"; };
+		D164869F1BC6B45200626EF9 /* sphereObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sphereObject.h; sourceTree = "<group>"; };
+		D182D9931BCE850700666FB5 /* objectMaterial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = objectMaterial.cpp; sourceTree = "<group>"; };
+		D182D9941BCE850700666FB5 /* objectMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = objectMaterial.h; sourceTree = "<group>"; };
+		D182D9961BCE859300666FB5 /* color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = color.cpp; sourceTree = "<group>"; };
+		D182D9971BCE859300666FB5 /* color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = color.h; sourceTree = "<group>"; };
 		D1A2DB321BB419C80051D6A5 /* monteCarlo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = monteCarlo; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1A2DB351BB419C80051D6A5 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D1A2DB3C1BB41CEE0051D6A5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -91,6 +112,20 @@
 				D1CB52901BB96883005EAE34 /* camera.h */,
 				D12C6FF81BC27C0A0000D44D /* sceneImage.cpp */,
 				D12C6FF91BC27C0A0000D44D /* sceneImage.h */,
+				D14F5D651BC544690054207D /* cubeObject.cpp */,
+				D14F5D661BC544690054207D /* cubeObject.h */,
+				D164869E1BC6B45200626EF9 /* sphereObject.cpp */,
+				D164869F1BC6B45200626EF9 /* sphereObject.h */,
+				D15A3D8A1BCD23A600498F68 /* intersectionPoint.cpp */,
+				D15A3D8B1BCD23A600498F68 /* intersectionPoint.h */,
+				D15A3D8D1BCD474300498F68 /* lightsource.cpp */,
+				D15A3D8E1BCD474300498F68 /* lightsource.h */,
+				D154312A1BCD86ED004114EF /* planeObject.cpp */,
+				D154312B1BCD86ED004114EF /* planeObject.h */,
+				D182D9931BCE850700666FB5 /* objectMaterial.cpp */,
+				D182D9941BCE850700666FB5 /* objectMaterial.h */,
+				D182D9961BCE859300666FB5 /* color.cpp */,
+				D182D9971BCE859300666FB5 /* color.h */,
 			);
 			path = monteCarlo;
 			sourceTree = "<group>";
@@ -151,12 +186,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D15A3D8C1BCD23A600498F68 /* intersectionPoint.cpp in Sources */,
+				D182D9951BCE850700666FB5 /* objectMaterial.cpp in Sources */,
 				D12C6FFA1BC27C0A0000D44D /* sceneImage.cpp in Sources */,
+				D14F5D671BC544690054207D /* cubeObject.cpp in Sources */,
 				D1E135CD1BB5B53100062547 /* ray.cpp in Sources */,
 				D1CB528E1BB932F6005EAE34 /* sceneObject.cpp in Sources */,
 				D1E135C81BB5397E00062547 /* theRoom.cpp in Sources */,
 				D1A2DB361BB419C80051D6A5 /* main.cpp in Sources */,
+				D15A3D8F1BCD474300498F68 /* lightsource.cpp in Sources */,
+				D154312C1BCD86ED004114EF /* planeObject.cpp in Sources */,
+				D182D9981BCE859300666FB5 /* color.cpp in Sources */,
 				D1CB52911BB96883005EAE34 /* camera.cpp in Sources */,
+				D16486A01BC6B45200626EF9 /* sphereObject.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

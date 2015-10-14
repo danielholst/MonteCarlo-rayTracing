@@ -30,9 +30,9 @@ int SceneImage::getWidth()
 
 void SceneImage::setPixelValue(int x, int y, float r, float g, float b)
 {
-    pixelValues[(x + y*imgWidth) *3] = r;
-    pixelValues[(x + y*imgWidth) *3 + 1] = g;
-    pixelValues[(x + y*imgWidth) *3 + 2] = b;
+    pixelValues[(x + y*imgWidth) *3] += r;
+    pixelValues[(x + y*imgWidth) *3 + 1] += g;
+    pixelValues[(x + y*imgWidth) *3 + 2] += b;
 }
 
 void SceneImage::saveImage(const char *filename)
@@ -60,6 +60,12 @@ void SceneImage::saveImage(const char *filename)
 //            unsigned char r = (unsigned char)(std::max(0.f, std::min(255.f, powf(pixel[0], 1/2.2) * 255 + 0.5f)));
 //            unsigned char g = (unsigned char)(std::max(0.f, std::min(255.f, powf(pixel[1], 1/2.2) * 255 + 0.5f)));
 //            unsigned char b = (unsigned char)(std::max(0.f, std::min(255.f, powf(pixel[2], 1/2.2) * 255 + 0.5f)));
+            if(r > 255)
+                r = 255;
+            if(g > 255)
+                g = 255;
+            if(b > 255)
+                b = 255;
             
             if(i != imgWidth-1)
                 stream << r << "  "<< g << "  " << b << "    ";

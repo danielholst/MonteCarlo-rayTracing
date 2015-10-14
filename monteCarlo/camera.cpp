@@ -20,7 +20,7 @@ Camera::Camera()
     outputImage = new SceneImage(800, 600);
 }
 
-void Camera::sendRaysThroughScene()
+void Camera::sendRaysThroughScene(TheRoom *room)
 {
     int width = outputImage->getWidth();
     int height = outputImage->getHeight();
@@ -44,12 +44,25 @@ void Camera::sendRaysThroughScene()
             //send rays through the pixel in the image plane out into the scene
             ray = Ray(pos, glm::vec3(imageX, imageY, imageZ));
             
-            if (ray.direction.x >= 0)
-                outputImage->setPixelValue(x ,y , 0, 244, 0);
-            if (ray.direction.x < 0)
-                outputImage->setPixelValue(x ,y , 0, 0, 244);
-            if (ray.direction.y > 0)
-                outputImage->setPixelValue(x ,y , 244, 0, 0);
+            //loop through objects in scene and check for intersection
+            for(int i = 0; i < room->sceneObjects->size(); i++)
+            {
+                IntersectionPoint *point = room->sceneObjects->at(i)->intersection(ray);
+                if(point != nullptr)
+                {
+                    float distToLightsource = sqrt( pow(room->lightSources->at(0)->getPos().x - point->getPos().x, 2) +
+                                                    pow(room->lightSources->at(0)->getPos().y - point->getPos().y, 2) +
+                                                    pow(room->lightSources->at(0)->getPos().z - point->getPos().z, 2) );
+                    
+                    outputImage->setPixelValue(x ,y , 244 - 40 * distToLightsource, 0, 0);
+                    
+                }
+                else
+                {
+                    outputImage->setPixelValue(x ,y , 0, 0, 0);
+                }
+            }
+            
 
             
             

@@ -8,4 +8,19 @@
 
 #include "sceneObject.h"
 
-SceneObject::SceneObject() {};
+SceneObject::SceneObject(glm::vec3 position)
+{
+    pos = position;
+};
+
+
+glm::vec3 SceneObject::getPos()
+{
+    return pos;
+}
+//
+//IntersectionPoint* SceneObject::intersection(Ray r)
+//{
+//    std::cout << "in Sceneobject " << std::endl;
+//    return nullptr;
+//}

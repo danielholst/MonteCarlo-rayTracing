@@ -10,12 +10,20 @@
 #define __monteCarlo__sceneObject__
 
 #include <stdio.h>
+#include <cmath>
+#include <iostream>
 #include "glm/glm/glm.hpp"
+#include "ray.h"
+#include "intersectionPoint.h"
 
 class SceneObject
 {
 public:
-    SceneObject();
+    SceneObject(glm::vec3 position);
+    
+    virtual IntersectionPoint* intersection(Ray r) = 0;
+    
+    glm::vec3 getPos();
     
 protected:
     glm::vec3 pos;

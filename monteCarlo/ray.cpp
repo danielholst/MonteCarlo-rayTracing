@@ -13,5 +13,5 @@ Ray::Ray() {}
 Ray::Ray(glm::vec3 s, glm::vec3 dir)
 {
     start = s;
-    direction = dir;
+    direction = glm::normalize(dir);
 }

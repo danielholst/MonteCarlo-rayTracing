@@ -15,7 +15,10 @@
 class Ray
 {
 public:
+    
     Ray();
+    
+    //create ray with start position and direction
     Ray(glm::vec3 s, glm::vec3 dir);
     
 
