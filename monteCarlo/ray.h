@@ -24,6 +24,7 @@ public:
 
     glm::vec3 start;
     glm::vec3 direction;
+    float minDist;
 };
 
 #endif /* defined(__monteCarlo__ray__) */

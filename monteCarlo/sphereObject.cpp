@@ -8,7 +8,7 @@
 
 #include "sphereObject.h"
 
-SphereObject::SphereObject(float rad, glm::vec3 position) : SceneObject(position)
+SphereObject::SphereObject(float rad, glm::vec3 position, ObjectMaterial objMat) : SceneObject(position, objMat)
 {
     radius = rad;
 }
@@ -35,8 +35,12 @@ IntersectionPoint* SphereObject::intersection(Ray r)
         rayPos += r.direction*step;
         if(checkDistance(rayPos, pos, radius))
         {
-//            std::cout << "intersection at " << rayPos.x << "," << rayPos.y << std::endl;
-            return new IntersectionPoint(rayPos, glm::vec3(0,0,0)); //change to normal vec for second arg
+            //to see which intersection is closest to the camera
+            if( r.minDist == 0 || rayPos.z < r.minDist)
+            {
+                r.minDist = rayPos.z;
+                return new IntersectionPoint(rayPos, glm::vec3(0,0,0), material); //change to normal vec for second arg
+            }
         }
     }
     

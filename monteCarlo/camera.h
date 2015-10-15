@@ -23,6 +23,8 @@ public:
     
     void sendRaysThroughScene(TheRoom *room);
     
+    
+    
     glm::vec3 pos;
     glm::vec3 upDir;
     glm::vec3 dir;

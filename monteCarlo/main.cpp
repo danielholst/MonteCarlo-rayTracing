@@ -28,13 +28,15 @@ int main(int argc, char** argv)
     SceneObject *object;
     
     //Add walls to room
-    ObjectMaterial mat = ObjectMaterial(0, 0, Color(0, 200, 40));
+    ObjectMaterial mat = ObjectMaterial(0, 0, Color(0, 200, 0));
     object = new PlaneObject(glm::vec3(-1.5, 0, -4), 0, 2, 3, mat);
     room->addObjectToScene(object);
     
+    mat = ObjectMaterial(0, 0, Color(200, 0, 0));
     object = new PlaneObject(glm::vec3(1.5, 0, -4), 0, 2, 3, mat);
     room->addObjectToScene(object);
     
+    mat = ObjectMaterial(0, 0, Color(200, 200, 200));
     object = new PlaneObject(glm::vec3(0, 0, -5.5), 3, 2, 0, mat);
     room->addObjectToScene(object);
     
@@ -52,10 +54,11 @@ int main(int argc, char** argv)
     
     
     //Add spheres in scene
-    object = new SphereObject(0.4f, glm::vec3(0.4,0, -3) );
+    ObjectMaterial matSphere = ObjectMaterial(0,0, Color(200, 0, 0));
+    object = new SphereObject(0.3f, glm::vec3(0.3,0, -3), matSphere);
     room->addObjectToScene(object);
     
-    object = new SphereObject(0.5f, glm::vec3(-0.3, 0.5, -4));
+    object = new SphereObject(0.4f, glm::vec3(-0.3, 0.5, -4), matSphere);
     room->addObjectToScene(object);
     
     //send rays from camera out to scene and save as pnm image

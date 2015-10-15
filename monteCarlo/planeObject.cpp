@@ -8,13 +8,11 @@
 
 #include "planeObject.h"
 
-PlaneObject::PlaneObject(glm::vec3 pos, float x, float y, float z, ObjectMaterial objMat) : SceneObject(pos)
+PlaneObject::PlaneObject(glm::vec3 pos, float x, float y, float z, ObjectMaterial objMat) : SceneObject(pos, objMat)
 {
     lengthX = x;
     lengthY = y;
     lengthZ = z;
-    
-    material = objMat;
 }
 
 bool checkHit(glm::vec3 rayPos, glm::vec3 pos, float lengthX, float lengthY, float lengthZ)
@@ -40,15 +38,14 @@ IntersectionPoint* PlaneObject::intersection(Ray r)
         rayPos += r.direction*step;
         if(checkHit(rayPos, pos, lengthX, lengthY, lengthZ))
         {
-//            std::cout << "Hit" << std::endl;
-            return new IntersectionPoint(rayPos, glm::vec3(0,0,0)); //change to normal vec for second arg
+            //to see which intersection is closest to the camera
+            if( r.minDist == 0 || rayPos.z < r.minDist)
+            {
+                r.minDist = rayPos.z;
+                return new IntersectionPoint(rayPos, glm::vec3(0,0,0), material); //change to normal vec for second arg
+            }
         }
     }
     
     return nullptr;
-}
-
-ObjectMaterial PlaneObject::getMaterial()
-{
-    return material;
 }

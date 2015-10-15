@@ -15,18 +15,23 @@
 #include "glm/glm/glm.hpp"
 #include "ray.h"
 #include "intersectionPoint.h"
+#include "objectMaterial.h"
 
 class SceneObject
 {
 public:
-    SceneObject(glm::vec3 position);
+    SceneObject(glm::vec3 position, ObjectMaterial objMat);
     
     virtual IntersectionPoint* intersection(Ray r) = 0;
     
     glm::vec3 getPos();
     
+    ObjectMaterial getMaterial();
+    
 protected:
     glm::vec3 pos;
+    
+    ObjectMaterial material;
     
 };
 

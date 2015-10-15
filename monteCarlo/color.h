@@ -17,6 +17,10 @@ public:
     Color();
     Color(float rC, float gC, float bC);
     
+    float getR();
+    float getG();
+    float getB();
+    
 private:
     float r;
     float g;

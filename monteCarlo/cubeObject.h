@@ -17,7 +17,7 @@
 class CubeObject : public SceneObject
 {
 public:
-    CubeObject(glm::vec3 position, glm::vec3 objectScale);
+    CubeObject(glm::vec3 position, glm::vec3 objectScale, ObjectMaterial objMat);
     
     IntersectionPoint* intersection(Ray r);
     

@@ -54,12 +54,14 @@ void Camera::sendRaysThroughScene(TheRoom *room)
                                                     pow(room->lightSources->at(0)->getPos().y - point->getPos().y, 2) +
                                                     pow(room->lightSources->at(0)->getPos().z - point->getPos().z, 2) );
                     
-                    outputImage->setPixelValue(x ,y , 244 - 40 * distToLightsource, 0, 0);
+                    outputImage->setPixelValue(x ,y , point->getMaterial().getColor().getR() - 30 * distToLightsource,
+                                                      point->getMaterial().getColor().getG() - 30 * distToLightsource,
+                                                      point->getMaterial().getColor().getB() - 30 * distToLightsource);     //temp solution, have to create function to send shadow rays towards lightsources
                     
                 }
                 else
                 {
-                    outputImage->setPixelValue(x ,y , 0, 0, 0);
+                   // outputImage->setPixelValue(x ,y , 0, 0, 0);
                 }
             }
             

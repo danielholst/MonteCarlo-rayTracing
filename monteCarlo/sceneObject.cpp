@@ -8,9 +8,10 @@
 
 #include "sceneObject.h"
 
-SceneObject::SceneObject(glm::vec3 position)
+SceneObject::SceneObject(glm::vec3 position, ObjectMaterial objMat)
 {
     pos = position;
+    material = objMat;
 };
 
 
@@ -24,3 +25,8 @@ glm::vec3 SceneObject::getPos()
 //    std::cout << "in Sceneobject " << std::endl;
 //    return nullptr;
 //}
+
+ObjectMaterial SceneObject::getMaterial()
+{
+    return material;
+}

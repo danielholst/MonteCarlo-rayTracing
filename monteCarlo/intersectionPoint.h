@@ -11,18 +11,23 @@
 
 #include <stdio.h>
 #include "glm/glm/glm.hpp"
+#include "objectMaterial.h"
 
 class IntersectionPoint
 {
 public:
-    IntersectionPoint(glm::vec3 position, glm::vec3 normalVector);
+    IntersectionPoint(glm::vec3 position, glm::vec3 normalVector, ObjectMaterial objMat);
     
     glm::vec3 getPos() {return pos;};
+    
+    ObjectMaterial getMaterial() { return material; };
     
     
 private:
     glm::vec3 pos;
     glm::vec3 normal;
+    
+    ObjectMaterial material;
 };
 
 #endif /* defined(__monteCarlo__intersectionPoint__) */

@@ -20,3 +20,17 @@ Color::Color(float rC, float gC, float bC)
     g = gC;
     b = bC;
 }
+
+
+float Color::getR()
+{
+    return r;
+}
+float Color::getG()
+{
+    return g;
+}
+float Color::getB()
+{
+    return b;
+}

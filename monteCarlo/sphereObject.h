@@ -12,18 +12,18 @@
 #include <stdio.h>
 #include <iostream>
 #include "sceneObject.h"
-#include "intersectionPoint.h"
-#include "ray.h"
+
 
 class SphereObject : public SceneObject
 {
 public:
-    SphereObject(float rad, glm::vec3 position);
+    SphereObject(float rad, glm::vec3 position, ObjectMaterial objMat);
     
     IntersectionPoint* intersection(Ray r);
     
 private:
     float radius;
+    
     
 };
 #endif /* defined(__monteCarlo__sphereObject__) */

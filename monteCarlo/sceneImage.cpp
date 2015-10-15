@@ -30,9 +30,9 @@ int SceneImage::getWidth()
 
 void SceneImage::setPixelValue(int x, int y, float r, float g, float b)
 {
-    pixelValues[(x + y*imgWidth) *3] += r;
-    pixelValues[(x + y*imgWidth) *3 + 1] += g;
-    pixelValues[(x + y*imgWidth) *3 + 2] += b;
+    pixelValues[(x + y*imgWidth) *3] = r;
+    pixelValues[(x + y*imgWidth) *3 + 1] = g;
+    pixelValues[(x + y*imgWidth) *3 + 2] = b;
 }
 
 void SceneImage::saveImage(const char *filename)

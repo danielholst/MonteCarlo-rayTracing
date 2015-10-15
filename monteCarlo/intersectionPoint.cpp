@@ -8,8 +8,9 @@
 
 #include "intersectionPoint.h"
 
-IntersectionPoint::IntersectionPoint(glm::vec3 position, glm::vec3 normalVector)
+IntersectionPoint::IntersectionPoint(glm::vec3 position, glm::vec3 normalVector, ObjectMaterial objMat)
 {
     pos = position;
     normal = normalVector;
+    material = objMat;
 }
