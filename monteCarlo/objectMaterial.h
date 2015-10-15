@@ -23,6 +23,7 @@ public:
     bool checkSpecular();
     
     Color getColor();
+    void setColor(Color c);
     
     float getTransparance();
     float getSpecular();

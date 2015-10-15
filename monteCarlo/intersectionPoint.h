@@ -22,6 +22,8 @@ public:
     
     ObjectMaterial getMaterial() { return material; };
     
+    void setMaterial( Color c);
+    
     
 private:
     glm::vec3 pos;

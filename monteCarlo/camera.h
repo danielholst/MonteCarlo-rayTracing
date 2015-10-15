@@ -23,6 +23,8 @@ public:
     
     void sendRaysThroughScene(TheRoom *room);
     
+    void sendShadowRays(TheRoom *room, IntersectionPoint *point);
+    
     
     
     glm::vec3 pos;

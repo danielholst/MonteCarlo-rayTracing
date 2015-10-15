@@ -9,7 +9,6 @@
 #include <iostream>
 #include <stdlib.h>
 #include <math.h>
-#include <GLUT/glut.h>
 
 #include "theRoom.h"
 #include "camera.h"
@@ -26,7 +25,7 @@ int main(int argc, char** argv)
     Camera *camera = new Camera();
     
     SceneObject *object;
-    
+
     //Add walls to room
     ObjectMaterial mat = ObjectMaterial(0, 0, Color(0, 200, 0));
     object = new PlaneObject(glm::vec3(-1.5, 0, -4), 0, 2, 3, mat);
@@ -49,16 +48,16 @@ int main(int argc, char** argv)
     
     
     //Add lightsource to scene
-    Lightsource *light = new Lightsource(glm::vec3(0, 4, -4), glm::vec3(0, -1, 0), 5);
+    Lightsource *light = new Lightsource(glm::vec3(0, 0.98, -4), glm::vec3(0, -1, 0), 5);
     room->addLightsourceToScene(light);
     
     
     //Add spheres in scene
     ObjectMaterial matSphere = ObjectMaterial(0,0, Color(200, 0, 0));
-    object = new SphereObject(0.3f, glm::vec3(0.3,0, -3), matSphere);
+    object = new SphereObject(0.2f, glm::vec3(0.3,-0.7, -5), matSphere);
     room->addObjectToScene(object);
     
-    object = new SphereObject(0.4f, glm::vec3(-0.3, 0.5, -4), matSphere);
+    object = new SphereObject(0.3f, glm::vec3(-0.3, -0.5, -4), matSphere);
     room->addObjectToScene(object);
     
     //send rays from camera out to scene and save as pnm image

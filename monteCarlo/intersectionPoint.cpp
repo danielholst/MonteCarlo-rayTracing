@@ -14,3 +14,8 @@ IntersectionPoint::IntersectionPoint(glm::vec3 position, glm::vec3 normalVector,
     normal = normalVector;
     material = objMat;
 }
+
+void IntersectionPoint::setMaterial(Color c)
+{
+    material.setColor(c);
+}

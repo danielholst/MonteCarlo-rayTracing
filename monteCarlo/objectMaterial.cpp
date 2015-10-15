@@ -42,6 +42,11 @@ Color ObjectMaterial::getColor()
     return color;
 }
 
+void ObjectMaterial::setColor(Color c)
+{
+    color = c;
+}
+
 float ObjectMaterial::getTransparance()
 {
     return transparance;

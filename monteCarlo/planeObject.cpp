@@ -19,8 +19,8 @@ bool checkHit(glm::vec3 rayPos, glm::vec3 pos, float lengthX, float lengthY, flo
 {
 //    std::cout << rayPos.x << ", " << rayPos.y << ", " << rayPos.z << std::endl;
     
-    if((rayPos.x > (pos.x - lengthX/2-0.03)) && (rayPos.x < (pos.x + lengthX/2+0.03)) &&
-       (rayPos.y > (pos.y - lengthY/2-0.03)) && (rayPos.y < (pos.y + lengthY/2+0.03)) &&
+    if((rayPos.x > (pos.x - lengthX/2-0.02)) && (rayPos.x < (pos.x + lengthX/2+0.02)) &&
+       (rayPos.y > (pos.y - lengthY/2-0.02)) && (rayPos.y < (pos.y + lengthY/2+0.02)) &&
        (rayPos.z > (pos.z - lengthZ/2-0.05)) && (rayPos.z < (pos.z + lengthZ/2+0.05)))
         return true;
     else
@@ -32,6 +32,7 @@ IntersectionPoint* PlaneObject::intersection(Ray r)
     glm::vec3 rayPos = r.start;
     glm::vec3 step;
     step = glm::vec3(0.1, 0.1, 0.1);
+    rayPos += r.direction +  r.direction + r.direction;
    
     for( int i = 0; i < 100; i++)
     {

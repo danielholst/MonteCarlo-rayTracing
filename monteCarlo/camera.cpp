@@ -20,6 +20,43 @@ Camera::Camera()
     outputImage = new SceneImage(800, 600);
 }
 
+void Camera::sendShadowRays(TheRoom *room, IntersectionPoint *point)
+{
+    glm::vec3 dir;
+    int nrOfLights = room->lightSources->size();
+    int nrOfObjects = room->sceneObjects->size();
+    
+    //loop through all light sources
+    for( int i = 0; i < nrOfLights; i++)
+    {
+        //get direction to light source
+        dir = room->lightSources->at(i)->getPos() - point->getPos();
+        
+        //create shadow ray towards light source
+        Ray shadowRay = Ray(point->getPos(), dir);
+        bool hit = false;
+        
+        //loop through all objects in scene and check if they are in the way
+        for( int j = 0; j < nrOfObjects; j++)
+        {
+            //if there is a object in the way
+            if( room->sceneObjects->at(j)->intersection(shadowRay) != nullptr )
+            {
+                hit = true;
+                Color c = Color(point->getMaterial().getColor().getR() * 0.1, point->getMaterial().getColor().getG() * 0.1, point->getMaterial().getColor().getB() * 0.1);
+                point->setMaterial(c);
+                break;
+            }
+        }
+        
+        //if the point is directly illuminated by the lightsource
+        if(!hit)
+        {
+            
+        }
+    }
+}
+
 void Camera::sendRaysThroughScene(TheRoom *room)
 {
     int width = outputImage->getWidth();
@@ -50,13 +87,11 @@ void Camera::sendRaysThroughScene(TheRoom *room)
                 IntersectionPoint *point = room->sceneObjects->at(i)->intersection(ray);
                 if(point != nullptr)
                 {
-                    float distToLightsource = sqrt( pow(room->lightSources->at(0)->getPos().x - point->getPos().x, 2) +
-                                                    pow(room->lightSources->at(0)->getPos().y - point->getPos().y, 2) +
-                                                    pow(room->lightSources->at(0)->getPos().z - point->getPos().z, 2) );
+                    sendShadowRays(room, point);
                     
-                    outputImage->setPixelValue(x ,y , point->getMaterial().getColor().getR() - 30 * distToLightsource,
-                                                      point->getMaterial().getColor().getG() - 30 * distToLightsource,
-                                                      point->getMaterial().getColor().getB() - 30 * distToLightsource);     //temp solution, have to create function to send shadow rays towards lightsources
+                    outputImage->setPixelValue(x ,y , point->getMaterial().getColor().getR(),
+                                                      point->getMaterial().getColor().getG(),
+                                                      point->getMaterial().getColor().getB());     //temp solution, have to create function to send shadow rays towards lightsources
                     
                 }
                 else
@@ -65,7 +100,10 @@ void Camera::sendRaysThroughScene(TheRoom *room)
                 }
             }
             
-
+            if(y%100 == 0 && x == 0)
+            {
+                std::cout << y/100 << "/6 rendered" << std::endl;
+            }
             
             
         }
