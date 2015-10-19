@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "monteCarlo/camera.cpp"
-            timestampString = "466594899.132491"
+            timestampString = "466946373.610087"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "Camera::sendRaysThroughScene(TheRoom *room)"
             landmarkType = "5">
          </BreakpointContent>
@@ -73,45 +73,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "monteCarlo/main.cpp"
-            timestampString = "466594471.796087"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "main(int argc, char** argv)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "monteCarlo/main.cpp"
-            timestampString = "466594471.796087"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "main(int argc, char** argv)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "monteCarlo/planeObject.cpp"
             timestampString = "466520133.501852"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "11"
             endingLineNumber = "11"
-            landmarkName = "PlaneObject::PlaneObject(glm::vec3 pos, float x, float y, float z, ObjectMaterial objMat)"
+            landmarkName = "PlaneObject::PlaneObject(glm::vec3 pos, float x, float y, float z, ObjectMaterial objMat, glm::vec3 normal)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -128,6 +96,38 @@
             startingLineNumber = "14"
             endingLineNumber = "14"
             landmarkName = "ObjectMaterial::ObjectMaterial()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "monteCarlo/color.h"
+            timestampString = "466612900.513486"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "class Color"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "monteCarlo/camera.cpp"
+            timestampString = "466946373.610087"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "Camera::sendShadowRays(TheRoom *room, IntersectionPoint *point)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

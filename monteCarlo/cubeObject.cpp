@@ -8,7 +8,7 @@
 
 #include "cubeObject.h"
 
-CubeObject::CubeObject(glm::vec3 position, glm::vec3 objectScale, ObjectMaterial objMat) : SceneObject(position, objMat)
+CubeObject::CubeObject(glm::vec3 position, glm::vec3 objectScale, ObjectMaterial objMat, glm::vec3 normal) : SceneObject(position, objMat, normal)
 {
     scale = objectScale;
 }

@@ -8,7 +8,7 @@
 
 #include "planeObject.h"
 
-PlaneObject::PlaneObject(glm::vec3 pos, float x, float y, float z, ObjectMaterial objMat) : SceneObject(pos, objMat)
+PlaneObject::PlaneObject(glm::vec3 pos, float x, float y, float z, ObjectMaterial objMat, glm::vec3 normal) : SceneObject(pos, objMat, normal)
 {
     lengthX = x;
     lengthY = y;
@@ -17,11 +17,10 @@ PlaneObject::PlaneObject(glm::vec3 pos, float x, float y, float z, ObjectMateria
 
 bool checkHit(glm::vec3 rayPos, glm::vec3 pos, float lengthX, float lengthY, float lengthZ)
 {
-//    std::cout << rayPos.x << ", " << rayPos.y << ", " << rayPos.z << std::endl;
     
-    if((rayPos.x > (pos.x - lengthX/2-0.02)) && (rayPos.x < (pos.x + lengthX/2+0.02)) &&
-       (rayPos.y > (pos.y - lengthY/2-0.02)) && (rayPos.y < (pos.y + lengthY/2+0.02)) &&
-       (rayPos.z > (pos.z - lengthZ/2-0.05)) && (rayPos.z < (pos.z + lengthZ/2+0.05)))
+    if((rayPos.x > (pos.x - lengthX/2-0.01)) && (rayPos.x < (pos.x + lengthX/2+0.01)) &&
+       (rayPos.y > (pos.y - lengthY/2-0.01)) && (rayPos.y < (pos.y + lengthY/2+0.01)) &&
+       (rayPos.z > (pos.z - lengthZ/2-0.04)) && (rayPos.z < (pos.z + lengthZ/2+0.04)))
         return true;
     else
         return false;
@@ -31,20 +30,25 @@ IntersectionPoint* PlaneObject::intersection(Ray r)
 {
     glm::vec3 rayPos = r.start;
     glm::vec3 step;
-    step = glm::vec3(0.1, 0.1, 0.1);
-    rayPos += r.direction +  r.direction + r.direction;
+    step = glm::vec3(0.01, 0.01, 0.01);
+//    rayPos += r.direction + r.direction + r.direction;
    
-    for( int i = 0; i < 100; i++)
+    for( int i = 0; i < 650; i++)
     {
         rayPos += r.direction*step;
-        if(checkHit(rayPos, pos, lengthX, lengthY, lengthZ))
+        if( i > 50 && checkHit(rayPos, pos, lengthX, lengthY, lengthZ))
         {
+//            std::cout << "number of steps: " << i << std::endl;
             //to see which intersection is closest to the camera
             if( r.minDist == 0 || rayPos.z < r.minDist)
             {
                 r.minDist = rayPos.z;
-                return new IntersectionPoint(rayPos, glm::vec3(0,0,0), material); //change to normal vec for second arg
+//                std::cout << rayPos.z << std::endl;
+                return new IntersectionPoint(rayPos, normalVec, material);
             }
+            
+            if( i == 649)
+                std::cout << "end of ray" << std::endl;
         }
     }
     

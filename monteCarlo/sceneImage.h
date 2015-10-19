@@ -13,6 +13,7 @@
 #include <fstream>
 #include <iostream>
 #include <cmath>
+#include "color.h"
 
 class SceneImage
 {
@@ -20,7 +21,7 @@ public:
     SceneImage(int width, int height);
     
     void saveImage(const char *filename);
-    void setPixelValue(int x, int y, float r, float g, float b);
+    void setPixelValue(int x, int y, Color c);
     int getHeight();
     int getWidth();
     

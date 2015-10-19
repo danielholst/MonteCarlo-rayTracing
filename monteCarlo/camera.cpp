@@ -25,34 +25,50 @@ void Camera::sendShadowRays(TheRoom *room, IntersectionPoint *point)
     glm::vec3 dir;
     int nrOfLights = room->lightSources->size();
     int nrOfObjects = room->sceneObjects->size();
+    float distToLight;
+    float intensity;
+    Color c;
     
     //loop through all light sources
     for( int i = 0; i < nrOfLights; i++)
     {
         //get direction to light source
         dir = room->lightSources->at(i)->getPos() - point->getPos();
+        distToLight = glm::length(dir);
         
         //create shadow ray towards light source
         Ray shadowRay = Ray(point->getPos(), dir);
         bool hit = false;
         
+        IntersectionPoint *tempPoint = point;
+        
         //loop through all objects in scene and check if they are in the way
-        for( int j = 0; j < nrOfObjects; j++)
-        {
-            //if there is a object in the way
-            if( room->sceneObjects->at(j)->intersection(shadowRay) != nullptr )
-            {
-                hit = true;
-                Color c = Color(point->getMaterial().getColor().getR() * 0.1, point->getMaterial().getColor().getG() * 0.1, point->getMaterial().getColor().getB() * 0.1);
-                point->setMaterial(c);
-                break;
-            }
-        }
+//        for( int j = 0; j < nrOfObjects; j++)
+//        {
+//            //if there is a object in the way
+//            if( room->sceneObjects->at(j)->intersection(shadowRay) != nullptr )
+//            {
+//                hit = true;
+//                c = Color(point->getMaterial().getColor() * 0.1);
+//                point->setMaterial(c);
+//                break;
+//            }
+//        }
         
         //if the point is directly illuminated by the lightsource
         if(!hit)
         {
-            
+            float dotProduct = glm::dot(tempPoint->getNormal(), shadowRay.direction);
+//            std::cout << dotProduct << std::endl;
+            intensity = 0.1 * dotProduct * (1/std::log(distToLight* 300));
+            if(intensity < 0)
+            {
+//                std::cout << intensity << std::endl;
+                intensity = 0;
+            }
+            c = Color ( tempPoint->getMaterial().getColor() * room->lightSources->at(i)->getColor() * intensity );
+//            c.print();
+            tempPoint->setMaterial(c);
         }
     }
 }
@@ -89,9 +105,7 @@ void Camera::sendRaysThroughScene(TheRoom *room)
                 {
                     sendShadowRays(room, point);
                     
-                    outputImage->setPixelValue(x ,y , point->getMaterial().getColor().getR(),
-                                                      point->getMaterial().getColor().getG(),
-                                                      point->getMaterial().getColor().getB());     //temp solution, have to create function to send shadow rays towards lightsources
+                    outputImage->setPixelValue(x ,y , point->getMaterial().getColor());     //temp solution, have to create function to send shadow rays towards lightsources
                     
                 }
                 else

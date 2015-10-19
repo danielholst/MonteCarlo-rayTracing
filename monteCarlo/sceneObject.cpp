@@ -8,10 +8,11 @@
 
 #include "sceneObject.h"
 
-SceneObject::SceneObject(glm::vec3 position, ObjectMaterial objMat)
+SceneObject::SceneObject(glm::vec3 position, ObjectMaterial objMat, glm::vec3 normal)
 {
     pos = position;
     material = objMat;
+    normalVec = normal;
 };
 
 
@@ -19,14 +20,14 @@ glm::vec3 SceneObject::getPos()
 {
     return pos;
 }
-//
-//IntersectionPoint* SceneObject::intersection(Ray r)
-//{
-//    std::cout << "in Sceneobject " << std::endl;
-//    return nullptr;
-//}
+
 
 ObjectMaterial SceneObject::getMaterial()
 {
     return material;
+}
+
+glm::vec3 SceneObject::getNormal()
+{
+    return normalVec;
 }

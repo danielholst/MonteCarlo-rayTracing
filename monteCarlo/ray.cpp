@@ -16,3 +16,10 @@ Ray::Ray(glm::vec3 s, glm::vec3 dir)
     direction = glm::normalize(dir);
     minDist = 0;
 }
+
+void Ray::display(glm::vec3 pos)
+{
+    std::cout << "ray position ( x = " << pos.x
+              << ", y = " << pos.y
+              << ", z = " << pos.z << std::endl;
+}

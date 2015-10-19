@@ -8,7 +8,7 @@
 
 #include "sphereObject.h"
 
-SphereObject::SphereObject(float rad, glm::vec3 position, ObjectMaterial objMat) : SceneObject(position, objMat)
+SphereObject::SphereObject(float rad, glm::vec3 position, ObjectMaterial objMat, glm::vec3 normal) : SceneObject(position, objMat, normal)
 {
     radius = rad;
 }
@@ -26,11 +26,13 @@ IntersectionPoint* SphereObject::intersection(Ray r)
 {
     glm::vec3 rayPos = r.start;
     glm::vec3 step;
-    step = glm::vec3(0.1, 0.1, 0.1);
+    step = glm::vec3(0.01, 0.01, 0.01);
     
-//    std::cout << r.direction.x << " " << r.direction.y << " " << r.direction.z << std::endl;
+    rayPos += r.direction*step + r.direction*step + r.direction*step;
     
-    for( int i = 0; i < 100; i++)
+//    r.display(rayPos);
+    
+    for( int i = 0; i < 600; i++)
     {
         rayPos += r.direction*step;
         if(checkDistance(rayPos, pos, radius))
@@ -39,7 +41,8 @@ IntersectionPoint* SphereObject::intersection(Ray r)
             if( r.minDist == 0 || rayPos.z < r.minDist)
             {
                 r.minDist = rayPos.z;
-                return new IntersectionPoint(rayPos, glm::vec3(0,0,0), material); //change to normal vec for second arg
+                glm::vec3 norVec = rayPos - pos;
+                return new IntersectionPoint(rayPos, norVec, material); //change to normal vec for second arg
             }
         }
     }

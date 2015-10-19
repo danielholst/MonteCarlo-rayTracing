@@ -28,11 +28,11 @@ int SceneImage::getWidth()
     return imgWidth;
 }
 
-void SceneImage::setPixelValue(int x, int y, float r, float g, float b)
+void SceneImage::setPixelValue(int x, int y, Color c)
 {
-    pixelValues[(x + y*imgWidth) *3] = r;
-    pixelValues[(x + y*imgWidth) *3 + 1] = g;
-    pixelValues[(x + y*imgWidth) *3 + 2] = b;
+    pixelValues[(x + y*imgWidth) *3] = c.getR();
+    pixelValues[(x + y*imgWidth) *3 + 1] = c.getG();
+    pixelValues[(x + y*imgWidth) *3 + 2] = c.getB();
 }
 
 void SceneImage::saveImage(const char *filename)

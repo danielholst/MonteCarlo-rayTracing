@@ -9,9 +9,9 @@
 #include "lightsource.h"
 
 
-Lightsource::Lightsource(glm::vec3 position, glm::vec3 direction, float strength)
+Lightsource::Lightsource(glm::vec3 position, glm::vec3 direction, Color c)
 {
     pos = position;
     dir = direction;
-    lightEmitted = strength;
+    color = c;
 }

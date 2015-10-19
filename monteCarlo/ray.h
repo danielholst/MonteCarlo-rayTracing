@@ -11,6 +11,7 @@
 
 #include "glm/glm/glm.hpp"
 #include <stdio.h>
+#include <iostream>
 
 class Ray
 {
@@ -25,6 +26,8 @@ public:
     glm::vec3 start;
     glm::vec3 direction;
     float minDist;
+    
+    void display(glm::vec3 pos);
 };
 
 #endif /* defined(__monteCarlo__ray__) */

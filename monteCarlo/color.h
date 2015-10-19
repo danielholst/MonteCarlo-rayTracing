@@ -10,6 +10,7 @@
 #define __monteCarlo__color__
 
 #include <stdio.h>
+#include <iostream>
 
 class Color
 {
@@ -20,6 +21,10 @@ public:
     float getR();
     float getG();
     float getB();
+    
+    Color operator*(Color c);
+    Color operator*(float c);
+    void print();
     
 private:
     float r;

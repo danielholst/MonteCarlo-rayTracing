@@ -21,6 +21,15 @@ Color::Color(float rC, float gC, float bC)
     b = bC;
 }
 
+Color Color::operator*(Color c)
+{
+    return Color(r*c.r, g*c.g, b*c.b );
+}
+
+Color Color::operator*(float c)
+{
+    return Color(r*c, g*c, b*c );
+}
 
 float Color::getR()
 {
@@ -33,4 +42,9 @@ float Color::getG()
 float Color::getB()
 {
     return b;
+}
+
+void Color::print()
+{
+    std::cout << r << ", " << g << ", " << b << std::endl;
 }

@@ -20,7 +20,7 @@
 class SceneObject
 {
 public:
-    SceneObject(glm::vec3 position, ObjectMaterial objMat);
+    SceneObject(glm::vec3 position, ObjectMaterial objMat, glm::vec3 normalVec);
     
     virtual IntersectionPoint* intersection(Ray r) = 0;
     
@@ -28,10 +28,14 @@ public:
     
     ObjectMaterial getMaterial();
     
+    glm::vec3 getNormal();
+    
 protected:
     glm::vec3 pos;
     
     ObjectMaterial material;
+    
+    glm::vec3 normalVec;
     
 };
 
