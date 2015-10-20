@@ -19,7 +19,7 @@ class SphereObject : public SceneObject
 public:
     SphereObject(float rad, glm::vec3 position, ObjectMaterial objMat, glm::vec3 normal);
     
-    IntersectionPoint* intersection(Ray r);
+    IntersectionPoint* intersection(glm::vec3 rayPos);
     
 private:
     float radius;

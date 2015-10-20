@@ -19,7 +19,7 @@ class PlaneObject : public SceneObject
 public:
     PlaneObject(glm::vec3 pos, float x, float y, float z, ObjectMaterial objMat, glm::vec3 normal);
     
-    IntersectionPoint* intersection(Ray r);
+    IntersectionPoint* intersection(glm::vec3 rayPos);
     
 private:
     float lengthX;

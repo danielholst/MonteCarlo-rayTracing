@@ -22,10 +22,19 @@ int main(int argc, char** argv)
 {
     //init enviroment and camera
     TheRoom *room = new TheRoom();
-    Camera *camera = new Camera();
+    Camera *camera = new Camera(1200,900);
     
     SceneObject *object;
 
+    //Add spheres in scene
+    ObjectMaterial matSphere = ObjectMaterial(0,0, Color(200, 0, 0));
+    object = new SphereObject(0.2f, glm::vec3(0.3,-0.7, -5), matSphere, glm::vec3(0,0,0));
+    room->addObjectToScene(object);
+    
+    matSphere = ObjectMaterial(0,0, Color(0,0,200));
+    object = new SphereObject(0.3f, glm::vec3(-0.3, -0.5, -4), matSphere, glm::vec3(0,0,0));
+    room->addObjectToScene(object);
+    
     //Add walls to room
     ObjectMaterial mat = ObjectMaterial(0, 0, Color(20, 100, 0));
     object = new PlaneObject(glm::vec3(-1.5, 0, -4), 0, 2, 3, mat, glm::vec3(1,0,0));
@@ -44,15 +53,6 @@ int main(int argc, char** argv)
     room->addObjectToScene(object);
     
     object = new PlaneObject(glm::vec3(0, 1, -4), 3, 0, 3, mat, glm::vec3(0,-1,0));
-    room->addObjectToScene(object);
-    
-    //Add spheres in scene
-    ObjectMaterial matSphere = ObjectMaterial(0,0, Color(200, 0, 0));
-    object = new SphereObject(0.2f, glm::vec3(0.3,-0.7, -5), matSphere, glm::vec3(0,0,0));  
-    room->addObjectToScene(object);
-    
-    matSphere = ObjectMaterial(0,0, Color(0,0,150));
-    object = new SphereObject(0.3f, glm::vec3(-0.3, -0.5, -4), matSphere, glm::vec3(0,0,0));
     room->addObjectToScene(object);
     
     

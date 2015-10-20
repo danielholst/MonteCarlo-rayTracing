@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "monteCarlo/camera.cpp"
-            timestampString = "466946373.610087"
+            timestampString = "467036182.259962"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "Camera::sendRaysThroughScene(TheRoom *room)"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "monteCarlo/camera.cpp"
-            timestampString = "466946373.610087"
+            timestampString = "467036182.259962"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "Camera::sendShadowRays(TheRoom *room, IntersectionPoint *point)"
             landmarkType = "5">
          </BreakpointContent>

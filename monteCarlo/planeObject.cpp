@@ -26,30 +26,11 @@ bool checkHit(glm::vec3 rayPos, glm::vec3 pos, float lengthX, float lengthY, flo
         return false;
 }
 
-IntersectionPoint* PlaneObject::intersection(Ray r)
+IntersectionPoint* PlaneObject::intersection(glm::vec3 rayPos)
 {
-    glm::vec3 rayPos = r.start;
-    glm::vec3 step;
-    step = glm::vec3(0.01, 0.01, 0.01);
-//    rayPos += r.direction + r.direction + r.direction;
-   
-    for( int i = 0; i < 650; i++)
+    if( checkHit(rayPos, pos, lengthX, lengthY, lengthZ))
     {
-        rayPos += r.direction*step;
-        if( i > 50 && checkHit(rayPos, pos, lengthX, lengthY, lengthZ))
-        {
-//            std::cout << "number of steps: " << i << std::endl;
-            //to see which intersection is closest to the camera
-            if( r.minDist == 0 || rayPos.z < r.minDist)
-            {
-                r.minDist = rayPos.z;
-//                std::cout << rayPos.z << std::endl;
-                return new IntersectionPoint(rayPos, normalVec, material);
-            }
-            
-            if( i == 649)
-                std::cout << "end of ray" << std::endl;
-        }
+        return new IntersectionPoint(rayPos, normalVec, material);
     }
     
     return nullptr;
