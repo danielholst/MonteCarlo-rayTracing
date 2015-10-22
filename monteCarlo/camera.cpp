@@ -144,10 +144,14 @@ void Camera::sendRaysThroughScene(TheRoom *room)
                         point = room->sceneObjects->at(i)->intersection(rayPos);
                         if(point != nullptr)
                         {
+                            //if sphere, move out intersection point to reduce intersection error
+                            if( i == 0 || i == 1)
+                            {
+                                point->setPos(point->getPos() - ray.getDir()*step);
+                            }
                             sendShadowRays(room, point);
                             
                             outputImage->setPixelValue(x ,y , Color(ray.getImportance(), ray.getImportance(), ray.getImportance()) * point->getMaterial().getColor());
-//                            std::cout << "imp = " << ray.getImportance() << std::endl;
                             
                             //get new pos and dir of ray
                             ray.setDir(getNewDirection(point, ray));

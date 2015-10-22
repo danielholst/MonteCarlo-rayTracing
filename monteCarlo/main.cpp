@@ -28,7 +28,7 @@ int main(int argc, char** argv)
 
     //init enviroment and camera
     TheRoom *room = new TheRoom();
-    Camera *camera = new Camera(400,300);
+    Camera *camera = new Camera(1200,900);
 
     SceneObject *object;
 
@@ -37,7 +37,7 @@ int main(int argc, char** argv)
     object = new SphereObject(0.2f, glm::vec3(0.3,-0.7, -5), matSphere, glm::vec3(0,0,0));
     room->addObjectToScene(object);
 
-    matSphere = ObjectMaterial(0,0.5, Color(0,0,200));
+    matSphere = ObjectMaterial(0,0.5, Color(30,30,30));
     object = new SphereObject(0.3f, glm::vec3(-0.5, -0.5, -4), matSphere, glm::vec3(0,0,0));
     room->addObjectToScene(object);
 
@@ -78,7 +78,14 @@ int main(int argc, char** argv)
     camera->sendRaysThroughScene(room);
     
     final=clock()-init;
-    std::cout << (double)final / ((double)CLOCKS_PER_SEC) << std::endl;
+    int totSec = final / CLOCKS_PER_SEC;
+    int min = totSec/60;
+    double sec = totSec%60;
+    
+    std::cout << "Rendering time: " << min << "min, " << sec << "seconds " << std::endl;
+    
+    
+    
 
     return 0;
 }
