@@ -16,6 +16,7 @@
 class IntersectionPoint
 {
 public:
+
     IntersectionPoint(glm::vec3 position, glm::vec3 normalVector, ObjectMaterial objMat);
     
     glm::vec3 getPos() {return pos;};

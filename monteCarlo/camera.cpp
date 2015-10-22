@@ -20,6 +20,17 @@ Camera::Camera(float width, float height)
     outputImage = new SceneImage(width, height);
 }
 
+//get new direction after intersection
+glm::vec3 getNewDirection(IntersectionPoint* point, glm::vec3 oldDirection)
+{
+    glm::vec3 newDir;
+    
+//    std:: cout << "old dir: " << oldDirection.x <<":" << oldDirection.y << ":" << oldDirection.z << std::endl;
+    newDir = oldDirection - glm::vec3(2,2,2) * ( glm::dot(oldDirection, point->getNormal()) * point->getNormal());
+//     std:: cout << "new dir: " << newDir.x <<":" << newDir.y << ":" << newDir.z << std::endl;
+    return newDir;
+}
+
 void Camera::sendShadowRays(TheRoom *room, IntersectionPoint *point)
 {
     glm::vec3 dir;
@@ -45,7 +56,7 @@ void Camera::sendShadowRays(TheRoom *room, IntersectionPoint *point)
         glm::vec3 step = glm::vec3(0.01,0.01,0.01);
         
         //loop through all objects in scene and check if they are in the way
-        for( int j = 0; j < 2; j++)
+        for( int j = 0; j < 3; j++)
         {
             rayPos = shadowRay.start;
             
@@ -123,7 +134,7 @@ void Camera::sendRaysThroughScene(TheRoom *room)
                     if(point != nullptr)
                     {
                         sendShadowRays(room, point);
-                    
+                        getNewDirection(point, ray.direction);
                         outputImage->setPixelValue(x ,y , point->getMaterial().getColor());
                         
                         rayHit = true;
