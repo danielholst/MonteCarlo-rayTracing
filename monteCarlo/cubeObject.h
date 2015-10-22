@@ -17,13 +17,16 @@
 class CubeObject : public SceneObject
 {
 public:
-    CubeObject(glm::vec3 position, glm::vec3 objectScale, ObjectMaterial objMat, glm::vec3 normal);
-    
-    IntersectionPoint* intersection(Ray r);
-    
+    CubeObject(glm::vec3 position, float x, float y, float z, ObjectMaterial objMat, glm::vec3 normal);
+
+    IntersectionPoint* intersection(glm::vec3 rayPos);
+
 private:
-    glm::vec3 pos;
-    glm::vec3 scale;    //not scale but maybe mat4 of corner vertices
+    //glm::vec3 pos;
+    //glm::vec3 scale;    //not scale but maybe mat4 of corner vertices
+    float lengthX;
+    float lengthY;
+    float lengthZ;
 };
 
 #endif /* defined(__monteCarlo__cubeObject__) */

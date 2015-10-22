@@ -17,11 +17,11 @@ class Lightsource
 {
 public:
     Lightsource(glm::vec3 position, glm::vec3 direction, Color c);
-    
+
     glm::vec3 getPos() { return pos; };
-    
+
     Color getColor() { return color; };
-    
+
 private:
     glm::vec3 pos;
     glm::vec3 dir;

@@ -8,14 +8,35 @@
 
 #include "cubeObject.h"
 
-CubeObject::CubeObject(glm::vec3 position, glm::vec3 objectScale, ObjectMaterial objMat, glm::vec3 normal) : SceneObject(position, objMat, normal)
+CubeObject::CubeObject(glm::vec3 position, float x, float y, float z, ObjectMaterial objMat, glm::vec3 normal) : SceneObject(position, objMat, normal)
 {
-    scale = objectScale;
+    //scale = objectScale;
+    lengthX = x;
+    lengthY = y;
+    lengthZ = z;
 }
 
-IntersectionPoint* CubeObject::intersection(Ray r)
+bool checkIfHit(glm::vec3 rayPos, glm::vec3 pos, float lengthX, float lengthY, float lengthZ)
 {
-    glm::vec3 rayPos;
+
+    if((rayPos.x > (pos.x - lengthX/2-0.01)) && (rayPos.x < (pos.x + lengthX/2+0.01)) &&
+       (rayPos.y > (pos.y - lengthY/2-0.01)) && (rayPos.y < (pos.y + lengthY/2+0.01)) &&
+       (rayPos.z > (pos.z - lengthZ/2-0.04)) && (rayPos.z < (pos.z + lengthZ/2+0.04)))
+        return true;
+    else
+        return false;
+}
+
+IntersectionPoint* CubeObject::intersection(glm::vec3 rayPos)
+{
+    if( checkIfHit(rayPos, pos, lengthX, lengthY, lengthZ))
+    {
+        return new IntersectionPoint(rayPos, normalVec, material);
+    }
 
     return nullptr;
 }
+
+
+
+
