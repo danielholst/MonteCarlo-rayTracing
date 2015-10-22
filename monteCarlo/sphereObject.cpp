@@ -26,7 +26,8 @@ IntersectionPoint* SphereObject::intersection(glm::vec3 rayPos)
 {
     if(checkDistance(rayPos, pos, radius))
     {
-        glm::vec3 norVec = rayPos - pos;
+//        std::cout << pos.x << ":" << pos.y << ":" << pos.z << std::endl;
+        glm::vec3 norVec = glm::normalize(rayPos - pos);
         return new IntersectionPoint(rayPos, norVec, material); //change to normal vec for second arg
     }
     

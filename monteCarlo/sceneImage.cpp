@@ -30,9 +30,9 @@ int SceneImage::getWidth()
 
 void SceneImage::setPixelValue(int x, int y, Color c)
 {
-    pixelValues[(x + y*imgWidth) *3] = c.getR();
-    pixelValues[(x + y*imgWidth) *3 + 1] = c.getG();
-    pixelValues[(x + y*imgWidth) *3 + 2] = c.getB();
+    pixelValues[(x + y*imgWidth) *3] += c.getR();
+    pixelValues[(x + y*imgWidth) *3 + 1] += c.getG();
+    pixelValues[(x + y*imgWidth) *3 + 2] += c.getB();
 }
 
 void SceneImage::saveImage(const char *filename)
@@ -57,9 +57,7 @@ void SceneImage::saveImage(const char *filename)
             int g = pixelValues[(i + j*imgWidth) * 3 + 1];
             int b = pixelValues[(i + j*imgWidth) * 3 + 2];
             
-//            unsigned char r = (unsigned char)(std::max(0.f, std::min(255.f, powf(pixel[0], 1/2.2) * 255 + 0.5f)));
-//            unsigned char g = (unsigned char)(std::max(0.f, std::min(255.f, powf(pixel[1], 1/2.2) * 255 + 0.5f)));
-//            unsigned char b = (unsigned char)(std::max(0.f, std::min(255.f, powf(pixel[2], 1/2.2) * 255 + 0.5f)));
+            
             if(r > 255)
                 r = 255;
             if(g > 255)

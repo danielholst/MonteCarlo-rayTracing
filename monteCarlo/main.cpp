@@ -17,9 +17,15 @@
 #include "cubeObject.h"
 #include "lightsource.h"
 #include "planeObject.h"
+#include <time.h>
 
 int main(int argc, char** argv)
 {
+
+    //to see rendering time
+    clock_t init, final;
+    init=clock();
+
     //init enviroment and camera
     TheRoom *room = new TheRoom();
     Camera *camera = new Camera(400,300);
@@ -27,31 +33,31 @@ int main(int argc, char** argv)
     SceneObject *object;
 
     //Add spheres to scene
-    ObjectMaterial matSphere = ObjectMaterial(0,0, Color(200, 0, 0));
+    ObjectMaterial matSphere = ObjectMaterial(0,0.8, Color(100, 100, 100));
     object = new SphereObject(0.2f, glm::vec3(0.3,-0.7, -5), matSphere, glm::vec3(0,0,0));
     room->addObjectToScene(object);
 
-    matSphere = ObjectMaterial(0,0, Color(0,0,200));
-    object = new SphereObject(0.3f, glm::vec3(-0.3, -0.5, -4), matSphere, glm::vec3(0,0,0));
+    matSphere = ObjectMaterial(0,0.5, Color(0,0,200));
+    object = new SphereObject(0.3f, glm::vec3(-0.5, -0.5, -4), matSphere, glm::vec3(0,0,0));
     room->addObjectToScene(object);
 
 
     //Add cube to scene
-    ObjectMaterial matCube = ObjectMaterial(0, 0, Color(100, 50, 50));
+    ObjectMaterial matCube = ObjectMaterial(0, 0.2, Color(100, 50, 50));
     object = new CubeObject(glm::vec3(1, -0.75, -4.5), 0.5, 0.5, 0.5, matCube, glm::vec3(0,0,1));
     room->addObjectToScene(object);
 
 
     //Add walls to room
-    ObjectMaterial mat = ObjectMaterial(0, 0, Color(20, 100, 0));
+    ObjectMaterial mat = ObjectMaterial(0, 0.05, Color(20, 100, 0));
     object = new PlaneObject(glm::vec3(-1.5, 0, -4), 0, 2, 3, mat, glm::vec3(1,0,0));
     room->addObjectToScene(object);
 
-    mat = ObjectMaterial(0, 0, Color(100, 20, 0));
+    mat = ObjectMaterial(0, 0.05, Color(100, 20, 0));
     object = new PlaneObject(glm::vec3(1.5, 0, -4), 0, 2, 3, mat, glm::vec3(-1,0,0));
     room->addObjectToScene(object);
 
-    mat = ObjectMaterial(0, 0, Color(100, 100, 100));
+    mat = ObjectMaterial(0, 0.05, Color(100, 100, 100));
     object = new PlaneObject(glm::vec3(0, 0, -5.5), 3, 2, 0, mat, glm::vec3(0,0,1));
     room->addObjectToScene(object);
 
@@ -68,10 +74,11 @@ int main(int argc, char** argv)
     room->addLightsourceToScene(light);
 
 
-
-
     //send rays from camera out to scene and save as pnm image
     camera->sendRaysThroughScene(room);
+    
+    final=clock()-init;
+    std::cout << (double)final / ((double)CLOCKS_PER_SEC) << std::endl;
 
     return 0;
 }
