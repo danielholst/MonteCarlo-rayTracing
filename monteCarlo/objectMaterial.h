@@ -25,11 +25,13 @@ public:
     Color getColor();
     void setColor(Color c);
     
+    float getDiffuse();
     float getTransparance();
     float getSpecular();
     
 private:
     
+    float diffuse;
     float specular;
     float transparance;
     Color color;

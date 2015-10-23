@@ -75,7 +75,7 @@ void SceneImage::saveImage(const char *filename)
     }
     stream.close();
     
-    std::cout << "To image" << std::endl;
+    std::cout << "To image " << filename << std::endl;
     
     
 }

@@ -110,7 +110,7 @@ void Camera::sendRaysThroughScene(TheRoom *room)
     bool rayHit = false;
     int endOfRay = 0;
     
-    std::cout << width << " " << height << std::endl;
+    std::cout << "Size of image = [ "<< width << " : " << height <<" ]" << std::endl;
 
 
     //loop through all pixels
@@ -144,8 +144,8 @@ void Camera::sendRaysThroughScene(TheRoom *room)
                         point = room->sceneObjects->at(i)->intersection(rayPos);
                         if(point != nullptr)
                         {
-                            //if sphere, move out intersection point to reduce intersection error
-                            if( i == 0 || i == 1)
+                            //if sphere or cube, move out intersection point to reduce intersection error
+                            if( i == 0 || i == 1 || i == 2)
                             {
                                 point->setPos(point->getPos() - ray.getDir()*step);
                             }

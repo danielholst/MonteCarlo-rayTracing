@@ -47,6 +47,11 @@ void ObjectMaterial::setColor(Color c)
     color = c;
 }
 
+float ObjectMaterial::getDiffuse()
+{
+    return diffuse;
+}
+
 float ObjectMaterial::getTransparance()
 {
     return transparance;
