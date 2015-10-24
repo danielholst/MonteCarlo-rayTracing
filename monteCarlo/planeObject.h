@@ -21,6 +21,8 @@ public:
     
     IntersectionPoint* intersection(glm::vec3 rayPos);
     
+    IntersectionPoint* intersection2(Ray r);
+    
 private:
     float lengthX;
     float lengthY;
