@@ -33,3 +33,38 @@ IntersectionPoint* SphereObject::intersection(glm::vec3 rayPos)
     
     return nullptr;
 }
+
+//To find intersection point with ray
+IntersectionPoint* SphereObject::intersection2(Ray r)
+{
+    glm::vec3 L = getPos()- r.getStart();
+    
+    float tca = glm::dot(L, r.getDir());
+    
+    //if object is behind ray
+    if(tca < 0)
+        return nullptr;
+    
+    float d = glm::dot(L, L) - tca*tca;
+    
+    //if ray miss the object
+    if( d > getRadius())
+        return nullptr;
+    
+    float thc = sqrt(getRadius() - d);
+    
+    // distance to intersection point
+    float t = tca - thc;
+    
+    // if there is another object in front
+    if (t > r.getMinDist() )
+        return nullptr;
+    else
+        r.setMinDist(t);
+    
+    glm::vec3 posOfIntersection = r.getStart() + r.getDir() * t - r.getDir() * glm::vec3(0.01,0.01,0.01);
+    glm::vec3 norVec = glm::normalize(posOfIntersection - pos);
+    
+    return new IntersectionPoint(posOfIntersection, norVec, material);
+    
+}

@@ -28,6 +28,9 @@ public:
     
     glm::vec3 getDir() { return direction; };
     glm::vec3 getStart() { return start; };
+    
+    float getMinDist() { return minDist; };
+    void setMinDist(float dist) { minDist = dist; };
 
     float getImportance ();
     void setImportance (float im);
@@ -39,6 +42,7 @@ private:
     float minDist;
     int nrOfIntersections;
     float importance;
+
     
     void display(glm::vec3 pos);
 };
