@@ -17,7 +17,7 @@ class ObjectMaterial
 public:
     
     ObjectMaterial();
-    ObjectMaterial(float transp, float spec, Color c);
+    ObjectMaterial(float diffuse, float transp, float spec, Color c);
     
     bool checkTransparace();
     bool checkSpecular();

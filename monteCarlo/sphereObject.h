@@ -23,7 +23,7 @@ public:
     
     float getRadius() { return radius; };
     
-    IntersectionPoint* intersection2(Ray r);
+    IntersectionPoint* intersection2(Ray &r);
 private:
     float radius;
     

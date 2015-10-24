@@ -24,18 +24,19 @@ bool checkDistance(glm::vec3 pos, glm::vec3 center, float radius)
 
 IntersectionPoint* SphereObject::intersection(glm::vec3 rayPos)
 {
-    if(checkDistance(rayPos, pos, radius))
+    if(checkDistance(rayPos, getPos(), radius))
     {
 //        std::cout << pos.x << ":" << pos.y << ":" << pos.z << std::endl;
-        glm::vec3 norVec = glm::normalize(rayPos - pos);
-        return new IntersectionPoint(rayPos, norVec, material); //change to normal vec for second arg
+        glm::vec3 norVec = glm::normalize(rayPos - getPos());
+        return new IntersectionPoint(rayPos, norVec, getMaterial()); //change to normal vec for second arg
     }
     
     return nullptr;
 }
 
+
 //To find intersection point with ray
-IntersectionPoint* SphereObject::intersection2(Ray r)
+IntersectionPoint* SphereObject::intersection2(Ray &r)
 {
     glm::vec3 L = getPos()- r.getStart();
     
@@ -48,13 +49,14 @@ IntersectionPoint* SphereObject::intersection2(Ray r)
     float d = glm::dot(L, L) - tca*tca;
     
     //if ray miss the object
-    if( d > getRadius())
+    if( d > pow(getRadius(), 2))
         return nullptr;
     
-    float thc = sqrt(getRadius() - d);
+    float thc = sqrt(pow(getRadius(),2) - d);
     
     // distance to intersection point
     float t = tca - thc;
+//    std::cout << t << std::endl;
     
     // if there is another object in front
     if (t > r.getMinDist() )
@@ -63,8 +65,8 @@ IntersectionPoint* SphereObject::intersection2(Ray r)
         r.setMinDist(t);
     
     glm::vec3 posOfIntersection = r.getStart() + r.getDir() * t - r.getDir() * glm::vec3(0.01,0.01,0.01);
-    glm::vec3 norVec = glm::normalize(posOfIntersection - pos);
+    glm::vec3 norVec = glm::normalize(posOfIntersection - getPos());
     
-    return new IntersectionPoint(posOfIntersection, norVec, material);
+    return new IntersectionPoint(posOfIntersection, norVec, getMaterial());
     
 }

@@ -10,12 +10,15 @@
 
 ObjectMaterial::ObjectMaterial()
 {
+    diffuse = 0;
     transparance = 0;
+    specular = 0;
     color = Color(0,0,0);
 }
 
-ObjectMaterial::ObjectMaterial(float transp, float spec, Color c)
+ObjectMaterial::ObjectMaterial(float diff, float transp, float spec, Color c)
 {
+    diffuse = diff;
     transparance = transp;
     specular = spec;
     color = c;

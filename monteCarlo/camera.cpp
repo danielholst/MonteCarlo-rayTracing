@@ -55,28 +55,28 @@ void Camera::sendShadowRays(TheRoom *room, IntersectionPoint *point)
         bool hit = false;
         
         IntersectionPoint *tempPoint = point;
-        glm::vec3 rayPos;
-        glm::vec3 step = glm::vec3(0.01,0.01,0.01);
+//        glm::vec3 rayPos;
+//        glm::vec3 step = glm::vec3(0.01,0.01,0.01);
         
         //loop through all objects in scene and check if they are in the way
-        for( int j = 0; j < 3; j++)
+        for( int j = 0; j < 2; j++)
         {
-            rayPos = shadowRay.getStart();
+//          rayPos = shadowRay.getStart();
             
-            for(int i = 0; i < 400; i++)
-            {
-                rayPos += shadowRay.getDir()*step;
-                
+//            for(int i = 0; i < 400; i++)
+//            {
+//                rayPos += shadowRay.getDir()*step;
+//                
                 //if there is a object in the way
-                if( room->sceneObjects->at(j)->intersection(rayPos) != nullptr )
+                if( room->sceneObjects->at(j)->intersection2( shadowRay ) != nullptr )
                 {
                     hit = true;
-                    c = Color(point->getMaterial().getColor() * 0.1);
+                    c = Color(point->getMaterial().getColor() * 0.2);
                     point->setMaterial(c);
                     break;
                 }
-            }
         }
+//        }
         
         //if the point is directly illuminated by the lightsource
         if(!hit)
@@ -124,40 +124,38 @@ void Camera::sendRaysThroughScene(TheRoom *room)
             
             //send rays through the pixel in the image plane out into the scene
             ray = Ray(pos, glm::vec3(imageX, imageY, imageZ));
-            glm::vec3 step = glm::vec3(0.01, 0.01, 0.01);
+//            glm::vec3 step = glm::vec3(0.01, 0.01, 0.01);
             
-            glm::vec3 rayPos;
-            rayHit = false;
+//            glm::vec3 rayPos;
+//            rayHit = false;
             
             while ( endOfRay < 2 )
             {
-                rayPos = ray.getStart();
-                rayHit = false;
-                
-                for (int k = 0; k < 650; k++)
-                {
-                    rayPos += ray.getDir()*step;
-                    
+//                rayPos = ray.getStart();
+//                rayHit = false;
+//                
+//                for (int k = 0; k < 650; k++)
+//                {
+//                    rayPos += ray.getDir()*step;
+                        IntersectionPoint* temp = nullptr;
                     //loop through objects in scene and check for intersection
                     for(int i = 0; i < room->sceneObjects->size(); i++)
                     {
-                        point = room->sceneObjects->at(i)->intersection(rayPos);
+
+                        point = room->sceneObjects->at(i)->intersection2(ray);
                         if(point != nullptr)
                         {
-                            //if sphere or cube, move out intersection point to reduce intersection error
-                            if( i == 0 || i == 1 || i == 2)
-                            {
-                                point->setPos(point->getPos() - ray.getDir()*step);
-                            }
+                            temp = point;
+                            rayHit = true;
+//                            //if sphere or cube, move out intersection point to reduce intersection error
+//                            if( i == 0 || i == 1 || i == 2)
+//                            {
+//                                point->setPos(point->getPos() - ray.getDir()*step);
+//                            }
                             sendShadowRays(room, point);
                             
                             outputImage->setPixelValue(x ,y , Color(ray.getImportance(), ray.getImportance(), ray.getImportance()) * point->getMaterial().getColor());
-                            
-                            //get new pos and dir of ray
-                            ray.setDir(getNewDirection(point, ray));
-                            ray.setStart(rayPos);
-                            
-                            rayHit = true;
+//                            rayHit = true;
                             
                         }
                         else
@@ -165,18 +163,31 @@ void Camera::sendRaysThroughScene(TheRoom *room)
                             //if no object was hit
                             outputImage->setPixelValue(x ,y , Color(0, 0, 0));
                         }
+                        
+                    }
+                    if(temp)
+                    {
+                        ray.setDir(getNewDirection(temp, ray));
+                        ray.setStart(temp->getPos());
+                        
                     }
                     if(rayHit)
-                        break;
-                }
-                
+                    {
+
+                        
+                    }
+            
+            //get new pos and dir of ray
+
+//                }
+            
             endOfRay++;
-        //            endOfRay = monteCarlo(point);
+//                    endOfRay = monteCarlo(point);
                 
                 
             }
             endOfRay = 0;
-            
+        
             if(y%100 == 0 && x == 0)
             {
                 std::cout << y/100 << "/" << height/100 << " rendered" << std::endl;

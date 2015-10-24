@@ -14,7 +14,7 @@ Ray::Ray(glm::vec3 s, glm::vec3 dir)
 {
     start = s;
     direction = glm::normalize(dir);
-    minDist = 0;
+    minDist = 1000;
     nrOfIntersections = 0;
     importance = 1;
 }

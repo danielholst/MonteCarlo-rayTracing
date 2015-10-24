@@ -24,13 +24,15 @@ public:
     
     virtual IntersectionPoint* intersection(glm::vec3 rayPos) = 0;
     
+    virtual IntersectionPoint* intersection2(Ray &r) = 0;
+    
     glm::vec3 getPos();
     
     ObjectMaterial getMaterial();
     
     glm::vec3 getNormal();
     
-protected:
+private:
     glm::vec3 pos;
     
     ObjectMaterial material;
