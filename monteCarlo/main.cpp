@@ -28,7 +28,7 @@ int main(int argc, char** argv)
 
     //init enviroment and camera
     TheRoom *room = new TheRoom();
-    Camera *camera = new Camera(1600,1200);
+    Camera *camera = new Camera(1200,900);
 
     SceneObject *object;
 

@@ -55,16 +55,25 @@ IntersectionPoint* SphereObject::intersection2(Ray &r)
     float thc = sqrt(pow(getRadius(),2) - d);
     
     // distance to intersection point
-    float t = tca - thc;
-//    std::cout << t << std::endl;
+    float t1 = tca - thc;
+    float t2 = tca + thc;
+    
+
+    if(t1 < 0)
+    {
+        t1 = t2;
+        if(t1 < 0)
+            return nullptr;
+    }
     
     // if there is another object in front
-    if (t > r.getMinDist() )
+    if (t1 > r.getMinDist() )
         return nullptr;
     else
-        r.setMinDist(t);
+        r.setMinDist(t1);
     
-    glm::vec3 posOfIntersection = r.getStart() + r.getDir() * t - r.getDir() * glm::vec3(0.01,0.01,0.01);
+    glm::vec3 posOfIntersection = r.getStart() + r.getDir() * t1; // - r.getDir() * glm::vec3(0.1,0.1,0.1);
+
     glm::vec3 norVec = glm::normalize(posOfIntersection - getPos());
     
     return new IntersectionPoint(posOfIntersection, norVec, getMaterial());
