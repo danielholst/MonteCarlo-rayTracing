@@ -54,15 +54,15 @@ int main(int argc, char** argv)
 
 
     //Add walls to room
-    ObjectMaterial mat = ObjectMaterial(0, 0, 0.05, Color(20, 100, 0));
+    ObjectMaterial mat = ObjectMaterial(0, 0, 0, Color(20, 100, 0));
     object = new PlaneObject(glm::vec3(-1.5, 0, -4), 0, 2, 3, mat, glm::vec3(1,0,0));
     room->addObjectToScene(object);
 
-    mat = ObjectMaterial(0, 0, 0.05, Color(100, 20, 0));
+    mat = ObjectMaterial(0, 0, 0, Color(100, 20, 0));
     object = new PlaneObject(glm::vec3(1.5, 0, -4), 0, 2, 3, mat, glm::vec3(-1,0,0));
     room->addObjectToScene(object);
 
-    mat = ObjectMaterial(0, 0, 0.05, Color(100, 100, 100));
+    mat = ObjectMaterial(0, 0, 0, Color(100, 100, 100));
     object = new PlaneObject(glm::vec3(0, 0, -5.5), 3, 2, 0, mat, glm::vec3(0,0,1));
     room->addObjectToScene(object);
 

@@ -71,7 +71,7 @@ IntersectionPoint* SphereObject::intersection2(Ray &r)
     else
         r.setMinDist(t1);
 
-    glm::vec3 posOfIntersection = r.getStart() + r.getDir() * t1 - r.getDir() * glm::vec3(0.05,0.05,0.05);
+    glm::vec3 posOfIntersection = r.getStart() + r.getDir() * t1 - r.getDir() * glm::vec3(0.08,0.08,0.08);
 
     glm::vec3 norVec = glm::normalize(posOfIntersection - getPos());
     

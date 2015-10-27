@@ -20,16 +20,59 @@ Camera::Camera(float width, float height)
     outputImage = new SceneImage(width, height);
 }
 
+//get diffuse reflection direction
+glm::vec3 CosWeightedRandomHemisphereDirection2( glm::vec3 n )
+{
+    const int PI = 3.1415926535897932384626433832795;
+    float Xi1 = (float)rand()/(float)RAND_MAX;
+    float Xi2 = (float)rand()/(float)RAND_MAX;
+    
+    float  theta = acos(sqrt(1.0-Xi1));
+    float  phi = 2.0 * PI * Xi2;
+    
+    float xs = sinf(theta) * cosf(phi);
+    float ys = cosf(theta);
+    float zs = sinf(theta) * sinf(phi);
+    
+    glm::vec3 y(n.x, n.y, n.z);
+    glm::vec3 h = y;
+    if (fabs(h.x)<=fabs(h.y) && fabs(h.x)<=fabs(h.z))
+        h.x= 1.0;
+    else if (fabs(h.y)<=fabs(h.x) && fabs(h.y)<=fabs(h.z))
+        h.y= 1.0;
+    else
+        h.z= 1.0;
+    
+    
+    glm::vec3 x = glm::normalize(pow(h,y));
+    glm::vec3 z = glm::normalize(pow(x,y));
+    
+    glm::vec3 direction = xs * x + ys * y + zs * z;
+    return glm::normalize(direction);
+}
 //get new direction after intersection
 glm::vec3 getNewDirection(IntersectionPoint* point, Ray& r)
 {
     glm::vec3 newDir;
+    //    std:: cout << "old dir: " << r.getDir().x <<":" << r.getDir().y << ":" << r.getDir().z << std::endl;
     
-    r.setImportance(r.getImportance() * point->getMaterial().getSpecular());
+    if ( point->getMaterial().checkSpecular() ) // if point is specular
+    {
+        r.setImportance(r.getImportance() * point->getMaterial().getSpecular());
+        newDir = r.getDir() - glm::vec3(2,2,2) * ( glm::dot(r.getDir(), point->getNormal()) * point->getNormal());
+    }
+    else if( point->getMaterial().checkTransparace()) // if point is transparent
+    {
+        
+    }
+    else    //if point is diffuse
+    {
+        //generate random new dir
+        r.setImportance(0.2);
+        newDir = CosWeightedRandomHemisphereDirection2(point->getNormal());
+        
+    }
 
-//    std::cout << "IMP" << r.getImportance() << std::endl;
-//    std:: cout << "old dir: " << r.getDir().x <<":" << r.getDir().y << ":" << r.getDir().z << std::endl;
-    newDir = r.getDir() - glm::vec3(2,2,2) * ( glm::dot(r.getDir(), point->getNormal()) * point->getNormal());
 //     std:: cout << "new dir: " << newDir.x <<":" << newDir.y << ":" << newDir.z << std::endl;
     return newDir;
 }
@@ -90,7 +133,7 @@ void Camera::sendRaysThroughScene(TheRoom *room)
 {
     int width = outputImage->getWidth();
     int height = outputImage->getHeight();
-    int nrOfSampleRays = 5;
+    int nrOfSampleRays = 40;
     int endOfRay = 0;
     
     float imageX;
