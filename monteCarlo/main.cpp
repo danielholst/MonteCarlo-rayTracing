@@ -28,18 +28,23 @@ int main(int argc, char** argv)
 
     //init enviroment and camera
     TheRoom *room = new TheRoom();
-    Camera *camera = new Camera(1200,900);
+    Camera *camera = new Camera(800,600);
 
     SceneObject *object;
 
     //Add spheres to scene
-    ObjectMaterial matSphere = ObjectMaterial(0, 0,0.8, Color(100, 100, 100));
+    ObjectMaterial matSphere = ObjectMaterial(0, 0,0.8, Color(50, 50, 50));
     object = new SphereObject(0.2f, glm::vec3(0.3,-0.7, -5), matSphere, glm::vec3(0,0,0));
     room->addObjectToScene(object);
 
     matSphere = ObjectMaterial(0, 0,0.5, Color(30,30,30));
     object = new SphereObject(0.3f, glm::vec3(-0.5, -0.5, -4), matSphere, glm::vec3(0,0,0));
     room->addObjectToScene(object);
+
+//    matSphere = ObjectMaterial(0,0,0, Color(200,200,200));
+//    object = new SphereObject(0.1f, glm::vec3(0,1, -4), matSphere, glm::vec3(0,0,0));
+//    room ->addObjectToScene(object);
+    
 
 
     //Add cube to scene
@@ -70,7 +75,7 @@ int main(int argc, char** argv)
 
 
     //Add lightsource to scene
-    Lightsource *light = new Lightsource(glm::vec3(0, 0.96, -4), glm::vec3(0, -1, 0), Color(100,100,100));
+    Lightsource *light = new Lightsource(glm::vec3(0, 0.9, -4), glm::vec3(0, -1, 0), Color(100,100,100));
     room->addLightsourceToScene(light);
 
 

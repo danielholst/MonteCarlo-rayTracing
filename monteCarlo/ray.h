@@ -35,6 +35,8 @@ public:
     float getImportance ();
     void setImportance (float im);
     
+    void display(glm::vec3 pos);
+    
 private:
                      
     glm::vec3 start;
@@ -42,9 +44,6 @@ private:
     float minDist;
     int nrOfIntersections;
     float importance;
-
-    
-    void display(glm::vec3 pos);
 };
 
 #endif /* defined(__monteCarlo__ray__) */

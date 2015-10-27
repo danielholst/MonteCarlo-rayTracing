@@ -16,12 +16,13 @@ ObjectMaterial::ObjectMaterial()
     color = Color(0,0,0);
 }
 
-ObjectMaterial::ObjectMaterial(float diff, float transp, float spec, Color c)
+ObjectMaterial::ObjectMaterial(float diff, float transp, float spec, Color c, bool light)
 {
     diffuse = diff;
     transparance = transp;
     specular = spec;
     color = c;
+    isLightSource = light;
 }
 
 bool ObjectMaterial::checkSpecular()

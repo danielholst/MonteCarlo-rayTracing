@@ -17,7 +17,7 @@ class ObjectMaterial
 public:
     
     ObjectMaterial();
-    ObjectMaterial(float diffuse, float transp, float spec, Color c);
+    ObjectMaterial(float diffuse, float transp, float spec, Color c, bool light = false);
     
     bool checkTransparace();
     bool checkSpecular();
@@ -31,6 +31,7 @@ public:
     
 private:
     
+    bool isLightSource;
     float diffuse;
     float specular;
     float transparance;
