@@ -20,8 +20,9 @@ Camera::Camera(float width, float height)
     outputImage = new SceneImage(width, height);
 }
 
+
 //get diffuse reflection direction
-glm::vec3 CosWeightedRandomHemisphereDirection2( glm::vec3 n )
+glm::vec3 CosWeightedRandomHemisphereDirection2( glm::vec3 n, Ray &r )
 {
     const int PI = 3.1415926535897932384626433832795;
     float Xi1 = (float)rand()/(float)RAND_MAX;
@@ -43,11 +44,14 @@ glm::vec3 CosWeightedRandomHemisphereDirection2( glm::vec3 n )
     else
         h.z= 1.0;
     
+//    std::cout << theta << std::endl;
+//    r.setImportance(r.getImportance()*theta);
     
     glm::vec3 x = glm::normalize(pow(h,y));
     glm::vec3 z = glm::normalize(pow(x,y));
     
     glm::vec3 direction = xs * x + ys * y + zs * z;
+//    std::cout << glm::normalize(direction).x << ":" << glm::normalize(direction).y << ":" << glm::normalize(direction).z << std::endl;;
     return glm::normalize(direction);
 }
 //get new direction after intersection
@@ -67,9 +71,18 @@ glm::vec3 getNewDirection(IntersectionPoint* point, Ray& r)
     }
     else    //if point is diffuse
     {
+        
+        
+        
+        
         //generate random new dir
-        r.setImportance(0.2);
-        newDir = CosWeightedRandomHemisphereDirection2(point->getNormal());
+        r.setImportance(0);     //TODODODODODODO
+        
+        
+        
+        
+        
+        newDir = CosWeightedRandomHemisphereDirection2(point->getNormal(), r);
         
     }
 
@@ -77,55 +90,83 @@ glm::vec3 getNewDirection(IntersectionPoint* point, Ray& r)
     return newDir;
 }
 
+//returns a random position on the light source
+glm::vec3 getRandomPos(glm::vec3 origo)
+{
+    const int PI = 3.1415926535897932384626433832795;
+    float phi = static_cast <float> (rand()) / static_cast <float> ((RAND_MAX)/(2.0f * PI));
+//    std::cout << phi << std::endl;
+    
+    //generate random nr between [0,0.2]
+    float length = static_cast <float> (rand()) / static_cast <float> ((RAND_MAX)/0.2);
+    glm::vec3 randPos = glm::vec3(origo.x + cos(phi)*length, origo.y, origo.z + sin(phi)*length);
+    
+//    std::cout << randPos.x << ":" << randPos.y << ":" << randPos.z << std::endl;
+    return randPos;
+}
+
 void Camera::sendShadowRays(TheRoom *room, IntersectionPoint *point)
 {
     glm::vec3 dir;
     int nrOfLights = room->lightSources->size();
     int nrOfObjects = room->sceneObjects->size();
+    int nrOfShadowRays = 5;
+    int nrOfHits = 0;
     float distToLight;
     float intensity;
     Color c;
+    SceneObject* temp;
     
     //loop through all light sources
     for( int i = 0; i < nrOfLights; i++)
     {
-        //get direction to light source
-        dir = room->lightSources->at(i)->getPos() - point->getPos();
-        distToLight = glm::length(dir);
-
-        //create shadow ray towards light source
-        Ray shadowRay = Ray(point->getPos(), dir);
-        bool hit = false;
+        temp = room->lightSources->at(i);
         
-        IntersectionPoint *tempPoint = nullptr;
+        for ( int k = 0; k < nrOfShadowRays; k++)
+        {
+            glm::vec3 randPos = getRandomPos(temp->getPos());
 
-        //loop through all objects in scene and check if they are in the way
-        for( int j = 0; j < nrOfObjects; j++)
-        {
-            tempPoint =  room->sceneObjects->at(j)->intersection2( shadowRay );
-            if( tempPoint != nullptr && (glm::length(tempPoint->getPos() - point->getPos())) < distToLight)
-                {
-                    hit = true;
-                    c = Color(point->getMaterial().getColor() * 0.2);
-                    point->setMaterial(c);
-                    break;
-                }
-        }
-        
-        //if the point is directly illuminated by the lightsource
-        if(!hit)
-        {
-            float dotProduct = glm::dot(point->getNormal(), shadowRay.getDir());
-            intensity = 0.15 * dotProduct * (1/std::log(distToLight* 300));
+            dir = randPos - point->getPos();
+            distToLight = glm::length(dir);
+
+            //create shadow ray towards light source
+            Ray shadowRay = Ray(point->getPos(), dir);
+            bool hit = false;
             
-            if(intensity < 0)
+            IntersectionPoint *tempPoint = nullptr;
+
+            //loop through all objects in scene and check if they are in the way
+            for( int j = 0; j < nrOfObjects; j++)
             {
-                intensity = 0;
+                tempPoint =  room->sceneObjects->at(j)->intersection2( shadowRay );
+                if( tempPoint != nullptr && (glm::length(tempPoint->getPos() - point->getPos())) < distToLight)
+                    {
+                        hit = true;
+                        nrOfHits++;
+                        break;
+                    }
             }
-            c = Color ( point->getMaterial().getColor() * room->lightSources->at(i)->getColor() * intensity );
-            point->setMaterial(c);
+            
+            //if the point is directly illuminated by the lightsource
+            if(!hit)
+            {
+                float dotProduct = glm::dot(point->getNormal(), shadowRay.getDir());
+                intensity = 0.15 * dotProduct * (1/std::log(distToLight* 300));
+                
+                if(intensity < 0)
+                {
+                    intensity = 0;
+                }
+                c = Color ( point->getMaterial().getColor() * room->lightSources->at(i)->getMaterial().getColor() * intensity );
+            }
         }
     }
+    if(nrOfHits != 0)
+    {
+        c = Color(point->getMaterial().getColor() * 0.5*(1/nrOfHits));
+    }
+    
+    point->setMaterial(c);
 }
 
 
@@ -133,7 +174,7 @@ void Camera::sendRaysThroughScene(TheRoom *room)
 {
     int width = outputImage->getWidth();
     int height = outputImage->getHeight();
-    int nrOfSampleRays = 40;
+    int nrOfSampleRays = 20;
     int endOfRay = 0;
     
     float imageX;
@@ -171,33 +212,36 @@ void Camera::sendRaysThroughScene(TheRoom *room)
                 
                 while ( endOfRay < 3 )
                 {
-                        IntersectionPoint* temp = nullptr;
+                    IntersectionPoint* temp = nullptr;
+                
+                    //loop to check if ray has reached a light source
                     
-                        //loop through objects in scene and check for intersection
-                        for(int i = 0; i < room->sceneObjects->size(); i++)
-                        {
+                    
+                    //loop through objects in scene and check for intersection
+                    for(int i = 0; i < room->sceneObjects->size(); i++)
+                    {
 
-                            point = room->sceneObjects->at(i)->intersection2(ray);
-                            if(point != nullptr)
-                            {
-                                temp = point;
-                            }
-                            else
-                            {
-                                //if no object was hit
-                                outputImage->setPixelValue(x ,y , Color(0, 0, 0));
-                            }
-                        }
-                        if(temp)
+                        point = room->sceneObjects->at(i)->intersection2(ray);
+                        if(point != nullptr)
                         {
-                            sendShadowRays(room, temp);
-                            outputImage->setPixelValue(x ,y , temp->getMaterial().getColor() * (float)(ray.getImportance() * (1/(float)nrOfSampleRays)));
-                            
-                            //get new pos and dir of ray
-                            ray.setDir(getNewDirection(temp, ray));
-                            ray.setStart(temp->getPos());
-                            ray.setMinDist(100);
+                            temp = point;
                         }
+                        else
+                        {
+                            //if no object was hit
+                            outputImage->setPixelValue(x ,y , Color(0, 0, 0));
+                        }
+                    }
+                    if(temp)
+                    {
+                        sendShadowRays(room, temp);
+                        outputImage->setPixelValue(x ,y , temp->getMaterial().getColor() * (float)(ray.getImportance() * (1/(float)nrOfSampleRays)));
+                        
+                        //get new pos and dir of ray
+                        ray.setDir(getNewDirection(temp, ray));
+                        ray.setStart(temp->getPos());
+                        ray.setMinDist(100);
+                    }
                 
                 endOfRay++;
     //          endOfRay = monteCarlo(point);

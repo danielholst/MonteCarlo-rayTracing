@@ -23,6 +23,8 @@ public:
     
     IntersectionPoint* intersection2(Ray &r);
     
+//    glm::vec3 getRandomPos() {return glm::vec3(0,0,0); };
+    
 private:
     float lengthX;
     float lengthY;

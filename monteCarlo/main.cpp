@@ -40,6 +40,11 @@ int main(int argc, char** argv)
     matSphere = ObjectMaterial(0, 0,0.5, Color(30,30,30));
     object = new SphereObject(0.3f, glm::vec3(-0.5, -0.5, -4), matSphere, glm::vec3(0,0,0));
     room->addObjectToScene(object);
+    
+    
+//    matSphere = ObjectMaterial(0, 0,0, Color(10,200,10));
+//    object = new SphereObject(0.2f, glm::vec3(0.5, -0.8, -4), matSphere, glm::vec3(0,0,0));
+//    room->addObjectToScene(object);
 
 //    matSphere = ObjectMaterial(0,0,0, Color(200,200,200));
 //    object = new SphereObject(0.1f, glm::vec3(0,1, -4), matSphere, glm::vec3(0,0,0));
@@ -75,7 +80,8 @@ int main(int argc, char** argv)
 
 
     //Add lightsource to scene
-    Lightsource *light = new Lightsource(glm::vec3(0, 0.9, -4), glm::vec3(0, -1, 0), Color(100,100,100));
+    matSphere = ObjectMaterial(0, 0,0, Color(100,100,100));
+    SceneObject *light = new SphereObject(0.1, glm::vec3(0, 0.98, -4), matSphere, glm::vec3(0,0,0));
     room->addLightsourceToScene(light);
 
 

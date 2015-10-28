@@ -16,13 +16,16 @@
 class Lightsource
 {
 public:
-    Lightsource(glm::vec3 position, glm::vec3 direction, Color c);
+    Lightsource(float rad, glm::vec3 position, glm::vec3 direction, Color c);
 
     glm::vec3 getPos() { return pos; };
 
     Color getColor() { return color; };
+    
+    float getRadius() {return radius; };
 
 private:
+    float radius;
     glm::vec3 pos;
     glm::vec3 dir;
     Color color;

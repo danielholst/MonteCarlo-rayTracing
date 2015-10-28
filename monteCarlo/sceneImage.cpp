@@ -56,7 +56,11 @@ void SceneImage::saveImage(const char *filename)
             int r = pixelValues[(i + j*imgWidth) * 3];
             int g = pixelValues[(i + j*imgWidth) * 3 + 1];
             int b = pixelValues[(i + j*imgWidth) * 3 + 2];
-            
+
+            //gamma correction
+//            r = pow(r, 1/2.2);
+//            g = pow(g, 1/2.2);
+//            b = pow(b, 1/2.2);
             
             if(r > 255)
                 r = 255;

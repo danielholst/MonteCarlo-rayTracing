@@ -24,6 +24,7 @@ public:
     
     Color operator*(Color c);
     Color operator*(float c);
+    Color operator+(Color c);
     void print();
     
 private:

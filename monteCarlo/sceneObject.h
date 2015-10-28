@@ -26,6 +26,8 @@ public:
     
     virtual IntersectionPoint* intersection2(Ray &r) = 0;
     
+//    virtual glm::vec3 getRandomPos() = 0;
+    
     glm::vec3 getPos();
     
     ObjectMaterial getMaterial();

@@ -9,8 +9,9 @@
 #include "lightsource.h"
 
 
-Lightsource::Lightsource(glm::vec3 position, glm::vec3 direction, Color c)
+Lightsource::Lightsource(float rad, glm::vec3 position, glm::vec3 direction, Color c)
 {
+    radius = rad;
     pos = position;
     dir = direction;
     color = c;

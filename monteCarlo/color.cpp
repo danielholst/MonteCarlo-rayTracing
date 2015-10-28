@@ -31,6 +31,11 @@ Color Color::operator*(float c)
     return Color(r*c, g*c, b*c );
 }
 
+Color Color::operator+(Color c)
+{
+    return Color(r+c.r, g+c.g, b+c.b);
+}
+
 float Color::getR()
 {
     return r;

@@ -21,6 +21,8 @@ public:
     
     IntersectionPoint* intersection(glm::vec3 rayPos);
     
+//    glm::vec3 getRandomPos();
+    
     float getRadius() { return radius; };
     
     IntersectionPoint* intersection2(Ray &r);

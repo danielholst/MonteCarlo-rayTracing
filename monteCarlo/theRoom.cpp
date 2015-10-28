@@ -11,10 +11,10 @@
 TheRoom::TheRoom()
 {
     sceneObjects = new std::vector<SceneObject*>();
-    lightSources = new std::vector<Lightsource*>();
+    lightSources = new std::vector<SceneObject*>();
 };
 
-void TheRoom::addLightsourceToScene(Lightsource *l)
+void TheRoom::addLightsourceToScene(SceneObject *l)
 {
     lightSources->push_back(l);
 }

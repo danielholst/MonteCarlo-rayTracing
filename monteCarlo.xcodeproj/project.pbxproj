@@ -274,6 +274,7 @@
 		D1A2DB3A1BB419C80051D6A5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -281,6 +282,7 @@
 		D1A2DB3B1BB419C80051D6A5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				"HEADER_SEARCH_PATHS[arch=*]" = (
 					Macintosh,
 					HD,

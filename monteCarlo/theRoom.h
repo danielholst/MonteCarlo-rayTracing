@@ -22,12 +22,12 @@ public:
     TheRoom();
     
     //add lightsource to the scene
-    void addLightsourceToScene(Lightsource *l);
+    void addLightsourceToScene(SceneObject *l);
     
     //add objects to the scene
     void addObjectToScene(SceneObject *obj);
     
     std::vector<SceneObject*> *sceneObjects;
-    std::vector<Lightsource*> *lightSources;
+    std::vector<SceneObject*> *lightSources;
 };
 #endif /* defined(__monteCarlo__theRoom__) */
