@@ -27,16 +27,6 @@ bool checkIfHit(glm::vec3 rayPos, glm::vec3 pos, float lengthX, float lengthY, f
         return false;
 }
 
-IntersectionPoint* CubeObject::intersection(glm::vec3 rayPos)
-{
-    if( checkIfHit(rayPos, getPos(), lengthX, lengthY, lengthZ))
-    {
-        return new IntersectionPoint(rayPos, getNormal(), getMaterial());
-    }
-
-    return nullptr;
-}
-
 
 
 

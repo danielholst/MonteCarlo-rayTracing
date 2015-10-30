@@ -59,11 +59,11 @@ glm::vec3 getNewDirection(IntersectionPoint* point, Ray& r)
 {
     glm::vec3 newDir;
     //    std:: cout << "old dir: " << r.getDir().x <<":" << r.getDir().y << ":" << r.getDir().z << std::endl;
-    
+    glm::vec3 perfectRef = r.getDir() - glm::vec3(2,2,2) * ( glm::dot(r.getDir(), point->getNormal()) * point->getNormal());
     if ( point->getMaterial().checkSpecular() ) // if point is specular
     {
         r.setImportance(r.getImportance() * point->getMaterial().getSpecular());
-        newDir = r.getDir() - glm::vec3(2,2,2) * ( glm::dot(r.getDir(), point->getNormal()) * point->getNormal());
+        newDir = perfectRef;
     }
     else if( point->getMaterial().checkTransparace()) // if point is transparent
     {
@@ -71,18 +71,33 @@ glm::vec3 getNewDirection(IntersectionPoint* point, Ray& r)
     }
     else    //if point is diffuse
     {
+        do
+        {
+        
+            float sx = (float)rand()/(float)RAND_MAX*2 -1;
+            float sy = (float)rand()/(float)RAND_MAX*2 -1;
+            float sz = (float)rand()/(float)RAND_MAX*2 -1;
+            
+            
+            newDir = glm::normalize(glm::vec3(sx,sy,sz));
+            
+        }while(glm::dot(point->getNormal(), newDir) < 0);
+
+        
+        float factor = glm::dot(newDir, perfectRef);
+//       std::cout << factor << std::endl;
+        if (factor < 0.1)
+            factor = 0.1;
+        if(factor > 0.7)
+            factor = 0.7;
         
         
-        
+//        std::cout << glm::dot(point->getNormal(), newDir) << std::endl;
         
         //generate random new dir
-        r.setImportance(0);     //TODODODODODODO
+        r.setImportance(r.getImportance()*0.5*factor);     //TODODODODODODO
         
-        
-        
-        
-        
-        newDir = CosWeightedRandomHemisphereDirection2(point->getNormal(), r);
+//        newDir = CosWeightedRandomHemisphereDirection2(point->getNormal(), r);
         
     }
 
@@ -110,7 +125,7 @@ void Camera::sendShadowRays(TheRoom *room, IntersectionPoint *point)
     glm::vec3 dir;
     int nrOfLights = room->lightSources->size();
     int nrOfObjects = room->sceneObjects->size();
-    int nrOfShadowRays = 5;
+    int nrOfShadowRays = 1;
     int nrOfHits = 0;
     float distToLight;
     float intensity;
@@ -124,9 +139,9 @@ void Camera::sendShadowRays(TheRoom *room, IntersectionPoint *point)
         
         for ( int k = 0; k < nrOfShadowRays; k++)
         {
-            glm::vec3 randPos = getRandomPos(temp->getPos());
+            //glm::vec3 randPos = getRandomPos(temp->getPos());
 
-            dir = randPos - point->getPos();
+            dir = temp->getPos() - point->getPos();
             distToLight = glm::length(dir);
 
             //create shadow ray towards light source
@@ -151,7 +166,8 @@ void Camera::sendShadowRays(TheRoom *room, IntersectionPoint *point)
             if(!hit)
             {
                 float dotProduct = glm::dot(point->getNormal(), shadowRay.getDir());
-                intensity = 0.15 * dotProduct * (1/std::log(distToLight* 300));
+
+                intensity = dotProduct * (7/(distToLight));
                 
                 if(intensity < 0)
                 {
@@ -163,7 +179,7 @@ void Camera::sendShadowRays(TheRoom *room, IntersectionPoint *point)
     }
     if(nrOfHits != 0)
     {
-        c = Color(point->getMaterial().getColor() * 0.5*(1/nrOfHits));
+        c = Color(point->getMaterial().getColor() * 0.9*(2/nrOfHits));
     }
     
     point->setMaterial(c);
@@ -174,7 +190,9 @@ void Camera::sendRaysThroughScene(TheRoom *room)
 {
     int width = outputImage->getWidth();
     int height = outputImage->getHeight();
-    int nrOfSampleRays = 20;
+    int nrOfObjects = room->sceneObjects->size();
+    int nrOfLightsources = room->lightSources->size();
+    int nrOfSampleRays = 60;
     int endOfRay = 0;
     
     float imageX;
@@ -196,7 +214,7 @@ void Camera::sendRaysThroughScene(TheRoom *room)
         for (int x = 0; x < width; x++)
         {
             //rays per pixel
-            for ( int i = 0 ; i< nrOfSampleRays; i++)
+            for ( int n = 0 ; n< nrOfSampleRays; n++)
             {
                 //random diff on ray through pixel
                 diffX = (2*(float)(rand() % 100) / 100)/(2*width) - (0.5/(float)width);
@@ -210,15 +228,29 @@ void Camera::sendRaysThroughScene(TheRoom *room)
                 //send rays through the pixel in the image plane out into the scene
                 ray = Ray(pos, glm::vec3(imageX, imageY, imageZ));
                 
-                while ( endOfRay < 3 )
+                while ( endOfRay < 4 )
                 {
                     IntersectionPoint* temp = nullptr;
                 
-                    //loop to check if ray has reached a light source
+//                    //loop to check if ray has reached a light source
+//                    for(int m = 0; m < nrOfLightsources; m++)
+//                    {
+//                        point = room->lightSources->at(m)->intersection2(ray);
+//                        if(point)
+//                        {
+//                            temp = point;
+//                            break;
+//                        }
+//                    }
+//                    if(temp)
+//                    {
+//                        outputImage->setPixelValue(x ,y , temp->getMaterial().getColor());
+//                        break;
+//                    }
                     
                     
                     //loop through objects in scene and check for intersection
-                    for(int i = 0; i < room->sceneObjects->size(); i++)
+                    for(int i = 0; i < nrOfObjects; i++)
                     {
 
                         point = room->sceneObjects->at(i)->intersection2(ray);
@@ -249,7 +281,7 @@ void Camera::sendRaysThroughScene(TheRoom *room)
                 }
                 endOfRay = 0;
             
-                if(y%100 == 0 && x == 0 && i == 0)
+                if(y%100 == 0 && x == 0 && n == 0)
                 {
                     std::cout << y/100 << "/" << height/100 << " rendered" << std::endl;
                 }

@@ -22,11 +22,7 @@ class SceneObject
 public:
     SceneObject(glm::vec3 position, ObjectMaterial objMat, glm::vec3 normalVec);
     
-    virtual IntersectionPoint* intersection(glm::vec3 rayPos) = 0;
-    
     virtual IntersectionPoint* intersection2(Ray &r) = 0;
-    
-//    virtual glm::vec3 getRandomPos() = 0;
     
     glm::vec3 getPos();
     

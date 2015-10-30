@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Daniel Holst. All rights reserved.
 //
 
+//NOT USED ATM
+
 #ifndef __monteCarlo__lightsource__
 #define __monteCarlo__lightsource__
 

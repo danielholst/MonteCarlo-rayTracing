@@ -26,16 +26,6 @@ bool checkHit(glm::vec3 rayPos, glm::vec3 pos, float lengthX, float lengthY, flo
         return false;
 }
 
-IntersectionPoint* PlaneObject::intersection(glm::vec3 rayPos)
-{
-    if( checkHit(rayPos, getPos(), lengthX, lengthY, lengthZ))
-    {
-        return new IntersectionPoint(rayPos, getNormal(), getMaterial());
-    }
-    
-    return nullptr;
-}
-
 IntersectionPoint* PlaneObject::intersection2(Ray &r)
 {
     float fixedPointInPlane;
@@ -108,7 +98,6 @@ IntersectionPoint* PlaneObject::intersection2(Ray &r)
             }
     }
     
-//    std::cout << "wrong format on plane" << std::endl;
     return nullptr;
     
 }

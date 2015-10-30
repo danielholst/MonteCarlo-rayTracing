@@ -22,30 +22,6 @@ bool checkDistance(glm::vec3 pos, glm::vec3 center, float radius)
         return false;
 }
 
-IntersectionPoint* SphereObject::intersection(glm::vec3 rayPos)
-{
-    if(checkDistance(rayPos, getPos(), radius))
-    {
-//        std::cout << pos.x << ":" << pos.y << ":" << pos.z << std::endl;
-        glm::vec3 norVec = glm::normalize(rayPos - getPos());
-        return new IntersectionPoint(rayPos, norVec, getMaterial()); //change to normal vec for second arg
-    }
-    
-    return nullptr;
-}
-
-//glm::vec3 SphereObject::getRandomPos()
-//{
-//    const int PI = 3.1415926535897932384626433832795;
-//    float randAsimuth;
-//    float randTheta;
-//    
-//    randAsimuth = rand() % (2*PI);
-//    std::cout << randAsimuth << std::endl;
-//    
-//    return glm::vec3(0,0,0);
-//}
-
 //To find intersection point with ray
 IntersectionPoint* SphereObject::intersection2(Ray &r)
 {
