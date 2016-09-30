@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "color.h"
 
+// Class to handle material for object
 class ObjectMaterial
 {
 public:

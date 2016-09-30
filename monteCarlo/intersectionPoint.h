@@ -20,15 +20,12 @@ public:
     IntersectionPoint(glm::vec3 position, glm::vec3 normalVector, ObjectMaterial objMat);
     
     glm::vec3 getPos() {return pos;};
-    
     void setPos(glm::vec3 position) { pos = position; };
     
     ObjectMaterial getMaterial() { return material; };
-    
     glm::vec3 getNormal() { return normal; };
     
     void setMaterial( Color c);
-    
     
 private:
     glm::vec3 pos;

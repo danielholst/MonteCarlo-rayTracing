@@ -10,7 +10,6 @@
 
 CubeObject::CubeObject(glm::vec3 position, float x, float y, float z, ObjectMaterial objMat, glm::vec3 normal) : SceneObject(position, objMat, normal)
 {
-    //scale = objectScale;
     lengthX = x;
     lengthY = y;
     lengthZ = z;

@@ -14,6 +14,7 @@
 #include "sceneObject.h"
 #include "lightsource.h"
 
+// class to collect all objects and lights in the scene
 class TheRoom
 {
 public:

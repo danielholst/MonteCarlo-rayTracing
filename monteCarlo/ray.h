@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <iostream>
 
+// class for the ray that is sent through the scene
 class Ray
 {
 public:

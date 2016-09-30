@@ -15,17 +15,6 @@ PlaneObject::PlaneObject(glm::vec3 pos, float x, float y, float z, ObjectMateria
     lengthZ = z;
 }
 
-bool checkHit(glm::vec3 rayPos, glm::vec3 pos, float lengthX, float lengthY, float lengthZ)
-{
-    
-    if((rayPos.x > (pos.x - lengthX/2-0.01)) && (rayPos.x < (pos.x + lengthX/2+0.01)) &&
-       (rayPos.y > (pos.y - lengthY/2-0.01)) && (rayPos.y < (pos.y + lengthY/2+0.01)) &&
-       (rayPos.z > (pos.z - lengthZ/2-0.04)) && (rayPos.z < (pos.z + lengthZ/2+0.04)))
-        return true;
-    else
-        return false;
-}
-
 IntersectionPoint* PlaneObject::intersection2(Ray &r)
 {
     float fixedPointInPlane;
@@ -53,7 +42,7 @@ IntersectionPoint* PlaneObject::intersection2(Ray &r)
             {
                 r.setMinDist(lengthToPlane);
                 newPos = r.getStart() + lengthToPlane * r.getDir() - glm::vec3(0.01,0.01,0.01)*r.getDir();
-//                std::cout << newPos.x << ":" << newPos.y << ":" << newPos.z << std::endl;
+
                 return new IntersectionPoint(newPos, getNormal(), getMaterial());
             }
     }

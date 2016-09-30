@@ -13,7 +13,7 @@
 #include <iostream>
 #include "sceneObject.h"
 
-
+// Sphere object
 class SphereObject : public SceneObject
 {
 public:

@@ -13,7 +13,7 @@
 #include "sceneObject.h"
 #include "glm/glm/glm.hpp"
 
-
+// Plane object
 class PlaneObject : public SceneObject
 {
 public:

@@ -15,6 +15,7 @@
 #include "glm/glm/glm.hpp"
 #include "color.h"
 
+// Class to handle a light source
 class Lightsource
 {
 public:

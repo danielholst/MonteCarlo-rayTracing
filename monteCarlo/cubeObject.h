@@ -14,6 +14,7 @@
 #include "ray.h"
 #include "intersectionPoint.h"
 
+// Cube object
 class CubeObject : public SceneObject
 {
 public:

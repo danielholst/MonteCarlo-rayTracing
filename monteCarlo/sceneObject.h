@@ -17,6 +17,7 @@
 #include "intersectionPoint.h"
 #include "objectMaterial.h"
 
+// abstract class for all objects in the scene
 class SceneObject
 {
 public:

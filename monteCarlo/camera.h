@@ -22,23 +22,20 @@ public:
     Camera(float width, float height);
     
     void sendRaysThroughScene(TheRoom *room);
-    
     void sendShadowRays(TheRoom *room, IntersectionPoint *point);
-    
     
 private:
     
     float screenWidth;
     float screenHeight;
+
     glm::vec3 pos;
     glm::vec3 upDir;
     glm::vec3 dir;
-    
+
     float fovX;
     float fovY;
-    
+
     SceneImage *outputImage;
-    
-    
 };
 #endif /* defined(__monteCarlo__camera__) */

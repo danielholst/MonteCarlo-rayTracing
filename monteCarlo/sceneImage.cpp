@@ -11,7 +11,6 @@
 
 SceneImage::SceneImage(int width, int height)
 {
-    //Standard size
     imgHeight = height;
     imgWidth = width;
     
@@ -50,7 +49,6 @@ void SceneImage::saveImage(const char *filename)
     //header for pmm file
 //    stream << "P6 " << imgWidth << " " << imgHeight << " 255 \n";
     
-//    float *pixel = pixelValues;
     for (int j = 0; j < imgHeight; ++j) {
         for (int i = 0; i < imgWidth; ++i) {
             int r = pixelValues[(i + j*imgWidth) * 3];
@@ -73,13 +71,12 @@ void SceneImage::saveImage(const char *filename)
                 stream << r << "  "<< g << "  " << b << "    ";
             else
                 stream << r << "  " << g << "  " << b;
-//            pixel += 3;
         }
         stream << "\n";
     }
     stream.close();
     
-    std::cout << "To image " << filename << std::endl;
+    std::cout << "Saved to: " << filename << std::endl;
     
     
 }

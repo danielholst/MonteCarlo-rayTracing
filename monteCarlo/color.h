@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <iostream>
 
+// Color class (rgb)
 class Color
 {
 public:
